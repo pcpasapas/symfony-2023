@@ -1,0 +1,83 @@
+<nav class="navbar navbar-expand-md navbar-dark bg-secondary shadow-sm">
+    <div class="container">
+        <a class="navbar-brand" style="font-family: Mynerve" href="{{ path("homepage") }}">
+        Pc Pas à pas
+        </a>
+        <button class=" navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <!-- Left Side Of Navbar -->
+                <ul class="navbar-nav me-auto text-center">
+                    <li class="nav-item">
+                        <a class="nav-link {{ app.request.pathinfo == '/' ? 'active' : '' }}" href="{{ path('homepage') }}">Accueil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {{ app.request.pathinfo == '/tutos' ? 'active' : '' }} " href="{{ path('tuto_pages') }}#app">Tutos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {{ app.request.pathinfo == '/jeux' ? 'active' : '' }}" href="{{ path('jeux_pages') }}">Configurations recommandées</a>
+                    </li>
+                    {# @if (Auth::user() && Auth::user()->role->id == 1) #}
+                    <li class="nav-item">
+                        {# <a class="nav-link {{ Route::is('admin') ? 'active' : '' }}" href="{{ route('admin') }}">Admin</a> #}
+                    </li>
+                    <li class="nav-item">
+                        {# <a class="nav-link {{ Route::is('voyager.dashboard') ? 'active' : '' }}" href="{{ route('voyager.dashboard') }}">Voyager</a> #}
+                    </li>
+                    <li class="nav-item">
+                        {# <a class="nav-link {{ Route::is('telescope') ? 'active' : '' }}" href="{{ route('telescope') }}" target="_blank">Telescope #}
+                        {# </a> #}
+                    </li>
+                    {# @endif #}
+                </ul>
+
+                <!-- Right Side Of Navbar -->
+                <ul class="navbar-nav ms-auto text-center">
+                    <!-- Authentication Links -->
+                    {% if app.user == null %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('app_login') }}#connect">Se connecter</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('app_register') }}">Créer un compte</a>
+                    </li>
+                    {% endif %}
+                    {% if app.user %}
+                    <li class="nav-item dropdown">
+                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                           {{ app.user.email}}
+                        </a>
+                         <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="{{ path('app_logout') }}">
+                                Se déconnecter
+                            </a>
+                        </div>
+                    </li>
+                    {% endif %}         
+                    </ul>
+            </div>
+    </div>
+</nav>
+
+<style>
+    .nav-link:hover {
+        background: radial-gradient(white, #37123C 100%);
+        border-color: black;
+        border-radius: 50%;
+        color: black !important;
+    }
+
+    .nav-link {
+        color: #d2c7e1;
+    }
+
+    .nav-link.active {
+        background: radial-gradient(white 30%, #37123C 80%);
+        border-color: black;
+        border-radius: 50%;
+        color: black !important;
+    }
+
+</style>

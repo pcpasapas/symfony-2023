@@ -1,0 +1,57 @@
+{% extends 'layouts/default.html.twig' %}
+
+{% block title %}Test{% endblock %}
+
+{% block body %}
+
+<div class="example-wrapper">
+    <p>
+    config hmr for reload twig et symfony avec webpack
+    <textarea>
+const fullConfig = Encore.getWebpackConfig();
+fullConfig.devServer = {
+    host: 'localhost',
+    compress: true,
+    hot: true,
+    watchFiles : {
+        paths : ['src/**/*.php', 'templates/**/*'],
+        options: {
+            usePolling: false,
+          },
+    }
+};
+module.exports = fullConfig 
+    </textarea>
+    </p>
+        regler le fuseau horaire symfony
+    <textarea>
+.env 
+APP_TIMEZONE=Europe/paris
+    </textarea>
+    <textarea>
+config.services.yaml
+parameters:
+    timezone: '%env(APP_TIMEZONE)%'
+    </textarea>
+    <textarea>
+src/Kernel.php
+<?php
+
+namespace App;
+
+use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
+use Symfony\Component\HttpKernel\Kernel as BaseKernel;
+
+class Kernel extends BaseKernel
+{
+    use MicroKernelTrait;
+
+    public function boot(): void
+    {
+        parent::boot();
+        date_default_timezone_set($this->getContainer()->getParameter('timezone'));
+    }
+}
+    </textarea>
+</div>
+{% endblock %}
