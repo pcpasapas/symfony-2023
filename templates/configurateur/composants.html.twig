@@ -1,0 +1,21 @@
+<div>
+	Les composants
+</div>
+{% for composant in composants %}
+	<div class="card" style="width: 18rem;">
+		<img src="..." class="card-img-top" alt="..." />
+		<div class="card-body">
+			<h5 class="card-title">
+				{{ composant.name }}
+			</h5>
+			<p class="card-text">
+				{{ composant.modele }}
+			</p>
+            <p class="card-text">
+				{{ composant.getFormattedPrice }}
+			</p>
+            {{ composant.category }}
+			<a href="{{ path('addCart', {'name' : composant.category, 'id' : composant.id }) }}" class="btn btn-primary">Ajouter au panier</a>
+		</div>
+	</div>
+{% endfor %}

@@ -6,6 +6,14 @@ use App\Entity\Category;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Controller\Admin\CategoryCrudController;
+use App\Entity\Alimentation;
+use App\Entity\Boitier;
+use App\Entity\CarteGraphique;
+use App\Entity\CarteMere;
+use App\Entity\Hdd;
+use App\Entity\Processeur;
+use App\Entity\Ram;
+use App\Entity\Ssd;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
@@ -51,5 +59,13 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
         yield MenuItem::linkToRoute('Retour au Site', 'fas fa-list', 'homepage');
         yield MenuItem::linkToCrud('Categories', 'fas fa-list', Category::class);
+        yield MenuItem::linkToCrud('Boitiers', 'fas fa-list', Boitier::class);
+        yield MenuItem::linkToCrud('Alimentations', 'fas fa-list', Alimentation::class);
+        yield MenuItem::linkToCrud('Processeurs', 'fas fa-list', Processeur::class);
+        yield MenuItem::linkToCrud('Cartes Mères', 'fas fa-list', CarteMere::class);
+        yield MenuItem::linkToCrud('Cartes Graphiques', 'fas fa-list', CarteGraphique::class);
+        yield MenuItem::linkToCrud('Ram', 'fas fa-list', Ram::class);
+        yield MenuItem::linkToCrud('Hdd', 'fas fa-list', Hdd::class);
+        yield MenuItem::linkToCrud('Ssd', 'fas fa-list', Ssd::class);
     }
 }

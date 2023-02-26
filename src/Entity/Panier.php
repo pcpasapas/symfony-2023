@@ -1,0 +1,157 @@
+<?php
+
+namespace App\Entity;
+
+use App\Repository\PanierRepository;
+use Doctrine\ORM\Mapping as ORM;
+
+#[ORM\Entity(repositoryClass: PanierRepository::class)]
+class Panier
+{
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column]
+    private ?int $id = null;
+
+    #[ORM\OneToOne(inversedBy: 'panier', cascade: ['persist', 'remove'])]
+    private ?User $user = null;
+
+    #[ORM\ManyToOne(inversedBy: 'paniers')]
+    private ?Boitier $boitier = null;
+
+    #[ORM\ManyToOne(inversedBy: 'paniers')]
+    private ?Alimentation $alimentation = null;
+
+    #[ORM\ManyToOne(inversedBy: 'paniers')]
+    private ?Processeur $processeur = null;
+
+    #[ORM\ManyToOne(inversedBy: 'paniers')]
+    private ?CarteMere $carteMere = null;
+
+    #[ORM\ManyToOne(inversedBy: 'paniers')]
+    private ?CarteGraphique $carteGraphique = null;
+
+    #[ORM\ManyToOne(inversedBy: 'paniers')]
+    private ?Ram $ram = null;
+
+    #[ORM\ManyToOne(inversedBy: 'paniers')]
+    private ?Hdd $hdd = null;
+
+    #[ORM\ManyToOne(inversedBy: 'paniers')]
+    private ?Ssd $ssd = null;
+
+  
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    public function getBoitier(): ?Boitier
+    {
+        return $this->boitier;
+    }
+
+    public function setBoitier(?Boitier $boitier): self
+    {
+        $this->boitier = $boitier;
+
+        return $this;
+    }
+
+    public function getAlimentation(): ?Alimentation
+    {
+        return $this->alimentation;
+    }
+
+    public function setAlimentation(?Alimentation $alimentation): self
+    {
+        $this->alimentation = $alimentation;
+
+        return $this;
+    }
+
+    public function getProcesseur(): ?Processeur
+    {
+        return $this->processeur;
+    }
+
+    public function setProcesseur(?Processeur $processeur): self
+    {
+        $this->processeur = $processeur;
+
+        return $this;
+    }
+
+    public function getCarteMere(): ?CarteMere
+    {
+        return $this->carteMere;
+    }
+
+    public function setCarteMere(?CarteMere $carteMere): self
+    {
+        $this->carteMere = $carteMere;
+
+        return $this;
+    }
+
+    public function getCarteGraphique(): ?CarteGraphique
+    {
+        return $this->carteGraphique;
+    }
+
+    public function setCarteGraphique(?CarteGraphique $carteGraphique): self
+    {
+        $this->carteGraphique = $carteGraphique;
+
+        return $this;
+    }
+
+    public function getRam(): ?Ram
+    {
+        return $this->ram;
+    }
+
+    public function setRam(?Ram $ram): self
+    {
+        $this->ram = $ram;
+
+        return $this;
+    }
+
+    public function getHdd(): ?Hdd
+    {
+        return $this->hdd;
+    }
+
+    public function setHdd(?Hdd $hdd): self
+    {
+        $this->hdd = $hdd;
+
+        return $this;
+    }
+
+    public function getSsd(): ?Ssd
+    {
+        return $this->ssd;
+    }
+
+    public function setSsd(?Ssd $ssd): self
+    {
+        $this->ssd = $ssd;
+
+        return $this;
+    }
+
+}
