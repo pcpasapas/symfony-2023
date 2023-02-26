@@ -24,12 +24,18 @@ class Alimentation
     #[ORM\Column]
     private ?int $price = null;
 
-    #[ORM\ManyToOne(inversedBy: 'alimentations')]
+    #[ORM\ManyToOne(inversedBy: 'alimentations', fetch: 'EAGER')]
     #[ORM\JoinColumn(nullable: true)]
     private ?Category $category = null;
 
     #[ORM\OneToMany(mappedBy: 'alimentation', targetEntity: Panier::class)]
     private Collection $paniers;
+
+    #[ORM\Column(nullable: true)]
+    private ?int $puissance = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $lien = null;
 
     public function __construct()
     {
@@ -121,6 +127,30 @@ class Alimentation
                 $panier->setAlimentation(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getPuissance(): ?int
+    {
+        return $this->puissance;
+    }
+
+    public function setPuissance(?int $puissance): self
+    {
+        $this->puissance = $puissance;
+
+        return $this;
+    }
+
+    public function getLien(): ?string
+    {
+        return $this->lien;
+    }
+
+    public function setLien(?string $lien): self
+    {
+        $this->lien = $lien;
 
         return $this;
     }

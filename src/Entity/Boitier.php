@@ -6,8 +6,6 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\BoitierRepository;
-use App\Repository\CategoryRepository;
-use Doctrine\Persistence\ManagerRegistry;
 
 
 #[ORM\Entity(repositoryClass: BoitierRepository::class)]
@@ -31,12 +29,18 @@ class Boitier
     #[ORM\Column]
     private ?int $price = null;
 
-    #[ORM\ManyToOne(inversedBy: 'boitiers')]
+    #[ORM\ManyToOne(inversedBy: 'boitiers', fetch: 'EAGER')]
     #[ORM\JoinColumn(nullable: true)]
     private ?Category $category = null;
 
     #[ORM\OneToMany(mappedBy: 'boitier', targetEntity: Panier::class)]
     private Collection $paniers;
+
+    #[ORM\Column(length:50, nullable: true)]
+    private ?string $format = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $lien = null;
 
 
 
@@ -125,6 +129,30 @@ class Boitier
                 $panier->setBoitier(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getFormat(): ?string
+    {
+        return $this->format;
+    }
+
+    public function setFormat(?string $format): self
+    {
+        $this->format = $format;
+
+        return $this;
+    }
+
+    public function getLien(): ?string
+    {
+        return $this->lien;
+    }
+
+    public function setLien(?string $lien): self
+    {
+        $this->lien = $lien;
 
         return $this;
     }

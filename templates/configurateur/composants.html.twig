@@ -1,9 +1,7 @@
-<div>
-	Les composants
-</div>
+<div class="d-flex">
 {% for composant in composants %}
 	<div class="card" style="width: 18rem;">
-		<img src="..." class="card-img-top" alt="..." />
+		<img src="{{ asset("./images/") ~ composant.category.slug ~ ("/") ~ composant.id ~ (".jpg") }}" class="card-img-top" alt="image du composant" />
 		<div class="card-body">
 			<h5 class="card-title">
 				{{ composant.name }}
@@ -14,8 +12,7 @@
             <p class="card-text">
 				{{ composant.getFormattedPrice }}
 			</p>
-            {{ composant.category }}
-			<a href="{{ path('addCart', {'name' : composant.category, 'id' : composant.id }) }}" class="btn btn-primary">Ajouter au panier</a>
+			<a href="{{ path('addCart', {'slug' : composant.category.slug, 'id' : composant.id }) }}" class="btn btn-primary">Ajouter au panier</a>
 		</div>
 	</div>
 {% endfor %}

@@ -3,6 +3,8 @@
 {% endblock %}
 <div>
 	{% for categorie in categories %}
-		<a href="{{ path('configurateur.cat', {'slug': categorie.slug}) }}"><button class="btn btn-primary">{{ categorie.name }}</button></a>
+		{% if panier[categorie.slug] == null %}
+			<a href="{{ path('configurateur.cat', {'slug': categorie.slug}) }}"><button class="btn btn-primary">{{ categorie.name }}</button></a>
+		{% endif %}
 	{% endfor %}
 </div>

@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-md navbar-dark bg-secondary shadow-sm">
 	<div class="container">
-		<a class="navbar-brand" style="font-family: Mynerve" href="{{ path('homepage') }}">Pc Pas à pas</a>
+		<a class="navbar-brand" style="font-family: Mynerve" href="{{ path('homepage') }}#index">Pc Pas à pas</a>
 		<button class="navbar-toggler"
 			type="button"
 			data-bs-toggle="collapse"
@@ -15,7 +15,7 @@
 			<!-- Left Side Of Navbar -->
 			<ul class="navbar-nav me-auto text-center">
 				<li class="nav-item">
-					<a class="nav-link {{ app.request.pathinfo == '/' ? 'active' : '' }}" href="{{ path('homepage') }}">Accueil</a>
+					<a class="nav-link {{ app.request.pathinfo == '/' ? 'active' : '' }}" href="{{ path('homepage') }}#index">Accueil</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link {{ app.request.pathinfo == '/configurateur' ? 'active' : '' }}"

@@ -1,9 +1,4 @@
-{% extends 'layouts/default.html.twig' %}
-
-{% block title %}Se connecter{% endblock %}
-
-{% block body %}
-<form method="post">
+<form method="post" action="/login">
     {% if error %}
         <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
     {% endif %}
@@ -12,8 +7,8 @@
         <div class="mb-3">
             Vous êtes connecté :  {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Se déconnecter</a>
         </div>
-    {% endif %}
 
+    {% else %}
     <h1 class="h3 mb-3 font-weight-normal">Se connecter</h1>
     <label for="inputEmail">Email</label>
     <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
@@ -38,5 +33,5 @@
     <button class="btn btn-lg btn-primary" type="submit">
         Se connecter
     </button>
+    {% endif %}
 </form>
-{% endblock %}

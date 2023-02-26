@@ -11,6 +11,7 @@ use App\Entity\Boitier;
 use App\Entity\CarteGraphique;
 use App\Entity\CarteMere;
 use App\Entity\Hdd;
+use App\Entity\Panier;
 use App\Entity\Processeur;
 use App\Entity\Ram;
 use App\Entity\Ssd;
@@ -67,5 +68,6 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Ram', 'fas fa-list', Ram::class);
         yield MenuItem::linkToCrud('Hdd', 'fas fa-list', Hdd::class);
         yield MenuItem::linkToCrud('Ssd', 'fas fa-list', Ssd::class);
+        yield MenuItem::linkToCrud('Paniers', 'fas fa-list', Panier::class);
     }
 }

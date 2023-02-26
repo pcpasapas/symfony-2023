@@ -45,13 +45,13 @@ class Category
     #[ORM\OneToMany(mappedBy: 'category', targetEntity: Boitier::class, fetch: 'EAGER')]
     private Collection $boitiers;
 
-    #[ORM\OneToMany(mappedBy: 'category', targetEntity: Alimentation::class)]
+    #[ORM\OneToMany(mappedBy: 'category', targetEntity: Alimentation::class, fetch: 'EAGER')]
     private Collection $alimentations;
 
-    #[ORM\OneToMany(mappedBy: 'category', targetEntity: Processeur::class)]
+    #[ORM\OneToMany(mappedBy: 'category', targetEntity: Processeur::class, fetch: 'EAGER')]
     private Collection $processeurs;
 
-    #[ORM\OneToMany(mappedBy: 'category', targetEntity: CarteMere::class)]
+    #[ORM\OneToMany(mappedBy: 'category', targetEntity: CarteMere::class, fetch: 'EAGER')]
     private Collection $carteMeres;
 
     #[ORM\OneToMany(mappedBy: 'category', targetEntity: CarteGraphique::class)]
@@ -96,7 +96,7 @@ class Category
         return $this;
     }
 
-    public function getCreatedAt(): ?DateTime
+    public function getCreatedAt(): ?DateTimeImmutable
     {
         return $this->created_at;
     }

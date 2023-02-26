@@ -1,0 +1,22 @@
+{% extends 'layouts/default.html.twig' %}
+
+{% block title %}
+	Accueil
+{% endblock %}
+
+{% block body %}
+	<div id="index">
+		{{ include('accueil/entete.html.twig') }}
+		<div class="hr-min mx-auto my-3" id="connect"></div>
+		{{ include('accueil/login.html.twig') }}
+	</div>
+
+<style>
+.hr-min {
+    border-top: 0.4em solid #37123C; 
+    border-radius: 1em;
+    text-align: center; 
+    width: 85%;     
+}
+</style>
+{% endblock %}

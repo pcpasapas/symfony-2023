@@ -16,28 +16,28 @@ class Panier
     #[ORM\OneToOne(inversedBy: 'panier', cascade: ['persist', 'remove'])]
     private ?User $user = null;
 
-    #[ORM\ManyToOne(inversedBy: 'paniers')]
+    #[ORM\ManyToOne(inversedBy: 'paniers', fetch: 'EAGER')]
     private ?Boitier $boitier = null;
 
-    #[ORM\ManyToOne(inversedBy: 'paniers')]
+    #[ORM\ManyToOne(inversedBy: 'paniers', fetch: 'EAGER')]
     private ?Alimentation $alimentation = null;
 
-    #[ORM\ManyToOne(inversedBy: 'paniers')]
+    #[ORM\ManyToOne(inversedBy: 'paniers', fetch: 'EAGER')]
     private ?Processeur $processeur = null;
 
-    #[ORM\ManyToOne(inversedBy: 'paniers')]
+    #[ORM\ManyToOne(inversedBy: 'paniers', fetch: 'EAGER')]
     private ?CarteMere $carteMere = null;
 
-    #[ORM\ManyToOne(inversedBy: 'paniers')]
+    #[ORM\ManyToOne(inversedBy: 'paniers', fetch: 'EAGER')]
     private ?CarteGraphique $carteGraphique = null;
 
-    #[ORM\ManyToOne(inversedBy: 'paniers')]
+    #[ORM\ManyToOne(inversedBy: 'paniers', fetch: 'EAGER')]
     private ?Ram $ram = null;
 
-    #[ORM\ManyToOne(inversedBy: 'paniers')]
+    #[ORM\ManyToOne(inversedBy: 'paniers', fetch: 'EAGER')]
     private ?Hdd $hdd = null;
 
-    #[ORM\ManyToOne(inversedBy: 'paniers')]
+    #[ORM\ManyToOne(inversedBy: 'paniers', fetch: 'EAGER')]
     private ?Ssd $ssd = null;
 
   
