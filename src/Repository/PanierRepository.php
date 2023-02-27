@@ -56,25 +56,25 @@ class PanierRepository extends ServiceEntityRepository
         return $tableau;
     }
 
-//    /**
-//     * @return Panier[] Returns an array of Panier objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('p')
-//            ->andWhere('p.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('p.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+   /**
+    * @return Panier[] Returns an array of Panier objects
+    */
+   public function findByUser($value): array
+   {
+       return $this->createQueryBuilder('p')
+           ->andWhere('p.user = :val')
+           ->setParameter('val', $value)
+           ->orderBy('p.created_at', 'DESC')
+           ->setMaxResults(10)
+           ->getQuery()
+           ->getResult()
+       ;
+   }
 
-//    public function findOneBySomeField($value): ?Panier
+//    public function findOneByUsername($value): ?Panier
 //    {
 //        return $this->createQueryBuilder('p')
-//            ->andWhere('p.exampleField = :val')
+//            ->andWhere('p.user = :val')
 //            ->setParameter('val', $value)
 //            ->getQuery()
 //            ->getOneOrNullResult()

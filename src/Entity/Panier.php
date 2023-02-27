@@ -7,13 +7,16 @@ use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: PanierRepository::class)]
 class Panier
-{
+{    public function __construct()
+    {
+        $this->setCreatedAt(new \DateTimeImmutable('now'));
+    }
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\OneToOne(inversedBy: 'panier', cascade: ['persist', 'remove'])]
+    #[ORM\ManyToOne(inversedBy: 'panier', cascade: ['persist', 'remove'])]
     private ?User $user = null;
 
     #[ORM\ManyToOne(inversedBy: 'paniers', fetch: 'EAGER')]
@@ -39,6 +42,9 @@ class Panier
 
     #[ORM\ManyToOne(inversedBy: 'paniers', fetch: 'EAGER')]
     private ?Ssd $ssd = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?\DateTimeImmutable $created_at = null;
 
   
     public function getId(): ?int
@@ -150,6 +156,18 @@ class Panier
     public function setSsd(?Ssd $ssd): self
     {
         $this->ssd = $ssd;
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeImmutable
+    {
+        return $this->created_at;
+    }
+
+    public function setCreatedAt(?\DateTimeImmutable $created_at): self
+    {
+        $this->created_at = $created_at;
 
         return $this;
     }

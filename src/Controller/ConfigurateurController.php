@@ -6,18 +6,21 @@ use App\Entity\Panier;
 use App\Entity\Boitier;
 use App\Entity\Category;
 use App\Models\Categorie;
-use Illuminate\Http\Request;
 use App\Repository\PanierRepository;
 use App\Repository\CategoryRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 class ConfigurateurController extends AbstractController
 {
     private $categories;
-    public function __construct(private CategoryRepository $categoryRepository, private PanierRepository $panierRepository)
+
+    public function __construct(private CategoryRepository $categoryRepository, private PanierRepository $panierRepository, private RequestStack $requestStack)
     {
         $this->categories = $categoryRepository->findAll();
     }
@@ -31,6 +34,29 @@ class ConfigurateurController extends AbstractController
         }
         return number_format($somme/100, 2, ',', ' ') .  '€';;
     }
+
+    #[Route('/configurateur/new', name: 'configurateur.new')]
+    public function new(PanierRepository $panierRepository, Request $request): Response
+    {
+        // creation du nouveau panier
+        $panier = new Panier();
+        if ($this->getUser()) {
+            $panier->setUser($this->getUser());
+        }
+        $panierRepository->save($panier, true);
+        // stockage dans la session
+        $session = $this->requestStack->getSession();
+        $session->set('panier', $panier->getId());
+
+        $panier = $this->panierRepository->getPanierInArray($session->get('panier'));
+        return $this->render('configurateur/layout.html.twig', [
+            'categories' => $this->categories,
+            'composants' => null,
+            'panier' => $panier,
+            'somme' => $this->getSomme($panier)
+        ]);
+    }
+
 
 
     #[Route('/configurateur', name: 'configurateur')]

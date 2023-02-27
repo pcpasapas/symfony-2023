@@ -1,0 +1,12 @@
+<div>
+	<p>
+		Reprendre vos anciennes configurations :
+	</p>
+	{% for item in panierUser %}
+		<button class="btn btn-primary">
+			<p>
+				{{ item.getCreatedAt()|format_datetime('full', 'short', locale = 'fr') }}
+			</p>
+		</button>
+	{% endfor %}
+</div>
