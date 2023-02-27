@@ -2,5 +2,5 @@
   "build/app.css": "http://localhost:8080/build/app.css",
   "build/app.js": "http://localhost:8080/build/app.js",
   "build/runtime.js": "http://localhost:8080/build/runtime.js",
-  "build/vendors-node_modules_symfony_stimulus-bridge_dist_index_js-node_modules_bootstrap_dist_js_boo-eead7d.js": "http://localhost:8080/build/vendors-node_modules_symfony_stimulus-bridge_dist_index_js-node_modules_bootstrap_dist_js_boo-eead7d.js"
+  "build/vendors-node_modules_symfony_stimulus-bridge_dist_index_js-node_modules_symfony_ux-turbo_dist-f36aea.js": "http://localhost:8080/build/vendors-node_modules_symfony_stimulus-bridge_dist_index_js-node_modules_symfony_ux-turbo_dist-f36aea.js"
 }

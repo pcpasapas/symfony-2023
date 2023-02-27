@@ -45,8 +45,10 @@ class ConfigurateurController extends AbstractController
         }
         $panierRepository->save($panier, true);
         // stockage dans la session
-        $session = $this->requestStack->getSession();
+
+        $session = $request->getSession();
         $session->set('panier', $panier->getId());
+
 
         $panier = $this->panierRepository->getPanierInArray($session->get('panier'));
         return $this->render('configurateur/layout.html.twig', [
@@ -60,9 +62,14 @@ class ConfigurateurController extends AbstractController
 
 
     #[Route('/configurateur', name: 'configurateur')]
-    public function index(): Response
+    public function index(Request $request): Response
     {
-        $panier = $this->panierRepository->getPanierInArray(1);
+        // stockage du panier dans la session
+        $session = $request->getSession();
+        if ($request->get('panier')) {
+            $session->set('panier', $request->get('panier'));
+        }
+        $panier = $this->panierRepository->getPanierInArray($session->get('panier'));
         return $this->render('configurateur/layout.html.twig', [
             'categories' => $this->categories,
             'composants' => null,
@@ -72,15 +79,17 @@ class ConfigurateurController extends AbstractController
     }
     
     #[Route('/configurateur/add/{slug}/{id}', name: 'addCart')]
-    public function addCart(string $slug, $id, ManagerRegistry $doctrine): Response
+    public function addCart(string $slug, $id, ManagerRegistry $doctrine, Request $request): Response
     {
         $categorie = $doctrine->getRepository(Category::class)->findOneBy(array('slug' => $slug));
         $em = $doctrine->getManager();
         $class = "App\\Entity\\" . $categorie->getSlug();
         $composant = $doctrine->getRepository($class)->find($id);
-        $panier = $doctrine->getRepository(Panier::class)->find(1);
+        $session = $request->getSession();
+        $panier = $doctrine->getRepository(Panier::class)->find($session->get('panier'));
 
-        $methode = "set" . $categorie->getSlug();
+
+        $methode = "set" . $categorie->getSlug();   
         $panier->$methode($composant);
         $em->flush();
 
@@ -88,10 +97,12 @@ class ConfigurateurController extends AbstractController
     }
 
     #[Route('/configurateur/remove/{categorie}', name: 'removeCart')]
-    public function removeCart(string $categorie, ManagerRegistry $doctrine): Response
+    public function removeCart(string $categorie, ManagerRegistry $doctrine, Request $request): Response
     {
         $em = $doctrine->getManager();
-        $panier = $doctrine->getRepository(Panier::class)->find(1);
+        $session = $request->getSession();
+
+        $panier = $doctrine->getRepository(Panier::class)->find($session->get('panier'));
         $methode = "set" . $categorie;
         $panier->$methode(null);
         $em->flush();
@@ -110,11 +121,14 @@ class ConfigurateurController extends AbstractController
         $class = "App\\Entity\\" . $category->getSlug();
         $repo = $doctrine->getRepository($class);
         $composants = $repo->findAll();
+
+        $session = $this->requestStack->getSession();
+
         return $this->render('configurateur/layout.html.twig', [
             'categories' => $this->categories,
             'composants' => $composants,
-            'panier' => $this->panierRepository->getPanierInArray(1),
-            'somme' => $this->getSomme($this->panierRepository->getPanierInArray(1))
+            'panier' => $this->panierRepository->getPanierInArray($session->get('panier')),
+            'somme' => $this->getSomme($this->panierRepository->getPanierInArray($session->get('panier')))
         ]);
     }
 

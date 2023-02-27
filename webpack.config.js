@@ -76,16 +76,16 @@ Encore
     //.autoProvidejQuery()
 ;
 const fullConfig = Encore.getWebpackConfig();
-// fullConfig.devServer = {
-//     host: 'localhost',
-//     compress: true,
-//     hot: true,
-//     watchFiles : {
-//         paths : ['src/**/*.php', 'templates/**/*'],
-//         options: {
-//             usePolling: false,
-//           },
-//     }
-// };
+fullConfig.devServer = {
+    host: 'localhost',
+    compress: true,
+    hot: true,
+    watchFiles : {
+        paths : ['src/**/*.php', 'templates/**/*'],
+        options: {
+            usePolling: false,
+          },
+    }
+};
 
 module.exports = fullConfig
