@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Repository;
 
 use App\Entity\Ssd;
@@ -11,10 +13,10 @@ use Doctrine\Persistence\ManagerRegistry;
  *
  * @method Ssd|null find($id, $lockMode = null, $lockVersion = null)
  * @method Ssd|null findOneBy(array $criteria, array $orderBy = null)
- * @method Ssd[]    findAll()
- * @method Ssd[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method array<Ssd> findAll()
+ * @method array<Ssd> findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class SsdRepository extends ServiceEntityRepository
+final class SsdRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {

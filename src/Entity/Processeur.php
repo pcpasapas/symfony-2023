@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Entity;
 
 use App\Repository\ProcesseurRepository;
@@ -35,7 +37,6 @@ class Processeur
     {
         $this->paniers = new ArrayCollection();
     }
-
 
     public function getId(): ?int
     {
@@ -73,7 +74,7 @@ class Processeur
 
     public function getFormattedPrice(): ?string
     {
-        return number_format($this->price/100, 2, ',', ' ') .  '€';
+        return number_format($this->price / 100, 2, ',', ' ') .  '€';
     }
 
     public function setPrice(int $price): self
@@ -105,7 +106,7 @@ class Processeur
 
     public function addPanier(Panier $panier): self
     {
-        if (!$this->paniers->contains($panier)) {
+        if (! $this->paniers->contains($panier)) {
             $this->paniers->add($panier);
             $panier->setProcesseur($this);
         }
@@ -124,5 +125,4 @@ class Processeur
 
         return $this;
     }
-
 }

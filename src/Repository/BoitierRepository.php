@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Repository;
 
 use App\Entity\Boitier;
@@ -11,8 +13,8 @@ use Doctrine\Persistence\ManagerRegistry;
  *
  * @method Boitier|null find($id, $lockMode = null, $lockVersion = null)
  * @method Boitier|null findOneBy(array $criteria, array $orderBy = null)
- * @method Boitier[]    findAll()
- * @method Boitier[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method array<Boitier> findAll()
+ * @method array<Boitier> findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
 class BoitierRepository extends ServiceEntityRepository
 {

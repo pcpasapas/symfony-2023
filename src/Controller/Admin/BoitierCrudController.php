@@ -1,12 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controller\Admin;
 
 use App\Entity\Boitier;
-use App\Controller\Admin\CategoryCrudController;
-use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 
 class BoitierCrudController extends AbstractCrudController
@@ -27,5 +25,4 @@ class BoitierCrudController extends AbstractCrudController
     //     ];
 
     // }
-
 }

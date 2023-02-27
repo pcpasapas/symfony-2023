@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Repository;
 
 use App\Entity\Processeur;
@@ -11,8 +13,8 @@ use Doctrine\Persistence\ManagerRegistry;
  *
  * @method Processeur|null find($id, $lockMode = null, $lockVersion = null)
  * @method Processeur|null findOneBy(array $criteria, array $orderBy = null)
- * @method Processeur[]    findAll()
- * @method Processeur[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method array<Processeur> findAll()
+ * @method array<Processeur> findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
 class ProcesseurRepository extends ServiceEntityRepository
 {

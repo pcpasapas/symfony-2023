@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Entity;
 
 use App\Repository\PanierRepository;
@@ -7,16 +9,13 @@ use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: PanierRepository::class)]
 class Panier
-{    public function __construct()
-    {
-        $this->setCreatedAt(new \DateTimeImmutable('now'));
-    }
+{
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\ManyToOne(inversedBy: 'panier', cascade: ['persist', 'remove'])]
+    #[ORM\ManyToOne]
     private ?User $user = null;
 
     #[ORM\ManyToOne(inversedBy: 'paniers', fetch: 'EAGER')]
@@ -46,7 +45,11 @@ class Panier
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $created_at = null;
 
-  
+    public function __construct()
+    {
+        $this->setCreatedAt(new \DateTimeImmutable('now'));
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -171,5 +174,4 @@ class Panier
 
         return $this;
     }
-
 }

@@ -1,18 +1,21 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Repository;
 
 use App\Entity\Panier;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
  * @extends ServiceEntityRepository<Panier>
  *
- * @method Panier|null find($id, $lockMode = null, $lockVersion = null)
- * @method Panier|null findOneBy(array $criteria, array $orderBy = null)
- * @method Panier[]    findAll()
- * @method Panier[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Panier|null   find($id, $lockMode = null, $lockVersion = null)
+ * @method Panier|null   findOneBy(array $criteria, array $orderBy = null)
+ * @method array<Panier> findAll()
+ * @method array<Panier> findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
 class PanierRepository extends ServiceEntityRepository
 {
@@ -39,11 +42,11 @@ class PanierRepository extends ServiceEntityRepository
         }
     }
 
-
-    public function getPanierInArray(int $id)
+    public function getPanierInArray(string|int $id): array
     {
         $panier = $this->find($id);
-        $tableau = [
+
+        return [
             'Boitier' => $panier->getBoitier(),
             'Alimentation' => $panier->getAlimentation(),
             'Processeur' => $panier->getProcesseur(),
@@ -51,15 +54,14 @@ class PanierRepository extends ServiceEntityRepository
             'CarteGraphique' => $panier->getCarteGraphique(),
             'Ram' => $panier->getRam(),
             'Hdd' => $panier->getHdd(),
-            'Ssd' => $panier->getSsd()
+            'Ssd' => $panier->getSsd(),
         ];
-        return $tableau;
     }
 
    /**
-    * @return Panier[] Returns an array of Panier objects
+    * @return array<Panier> Returns an array of Panier objects
     */
-   public function findByUser($value): array
+   public function findByUser(?User $value): array
    {
        return $this->createQueryBuilder('p')
            ->andWhere('p.user = :val')

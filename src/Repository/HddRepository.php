@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Repository;
 
 use App\Entity\Hdd;
@@ -11,8 +13,8 @@ use Doctrine\Persistence\ManagerRegistry;
  *
  * @method Hdd|null find($id, $lockMode = null, $lockVersion = null)
  * @method Hdd|null findOneBy(array $criteria, array $orderBy = null)
- * @method Hdd[]    findAll()
- * @method Hdd[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method array<Hdd> findAll()
+ * @method array<Hdd> findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
 class HddRepository extends ServiceEntityRepository
 {

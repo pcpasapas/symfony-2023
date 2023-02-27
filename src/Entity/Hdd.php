@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Entity;
 
 use App\Repository\HddRepository;
@@ -30,7 +32,6 @@ class Hdd
 
     #[ORM\OneToMany(mappedBy: 'hdd', targetEntity: Panier::class)]
     private Collection $paniers;
-
 
     public function __construct()
     {
@@ -73,7 +74,7 @@ class Hdd
 
     public function getFormattedPrice(): ?string
     {
-        return number_format($this->price/100, 2, ',', ' ') .  '€';
+        return number_format($this->price / 100, 2, ',', ' ') .  '€';
     }
 
     public function setPrice(int $price): self
@@ -105,7 +106,7 @@ class Hdd
 
     public function addPanier(Panier $panier): self
     {
-        if (!$this->paniers->contains($panier)) {
+        if (! $this->paniers->contains($panier)) {
             $this->paniers->add($panier);
             $panier->setHdd($this);
         }
@@ -124,5 +125,4 @@ class Hdd
 
         return $this;
     }
-
 }

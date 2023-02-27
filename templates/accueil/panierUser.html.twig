@@ -3,12 +3,20 @@
 		Reprendre vos anciennes configurations :
 	</p>
 	{% for item in panierUser %}
-		<a href="{{  path('configurateur', {'panier' : item.id}) }}">
-			<button class="btn btn-primary">
-				<p>
-					{{ item.getCreatedAt()|format_datetime('full', 'short', locale = 'fr') }}
-				</p>
-			</button>
-		</a>
+		<p>
+			<a href="{{
+				path(
+					'configurateur',
+					{
+						panier: item.id
+					}
+				)
+				}}">
+				<button class="btn btn-primary">{{ item.getCreatedAt()|format_datetime('full', 'short', locale = 'fr') }}</button>
+			</a>
+			<form action="{{ path('removeUserCart', {panier : item.id }) }}" method="post">
+				<button type="submit class="btn btn-danger">X</button>
+			</form>
+		</p>
 	{% endfor %}
 </div>

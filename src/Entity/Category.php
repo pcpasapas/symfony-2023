@@ -1,33 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Entity;
 
-use DateTime;
+use App\Repository\CategoryRepository;
+use DateTimeImmutable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use App\Repository\CategoryRepository;
-use DateTimeImmutable;
 
 #[ORM\Entity(repositoryClass: CategoryRepository::class)]
 class Category
 {
-    public function __toString()
-    {
-        return $this->getName();
-    }
-    public function __construct()
-    {
-        $this->setCreatedAt(new DateTimeImmutable());
-        $this->boitiers = new ArrayCollection();
-        $this->alimentations = new ArrayCollection();
-        $this->processeurs = new ArrayCollection();
-        $this->carteMeres = new ArrayCollection();
-        $this->carteGraphiques = new ArrayCollection();
-        $this->rams = new ArrayCollection();
-        $this->hdds = new ArrayCollection();
-        $this->ssds = new ArrayCollection();
-    }
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -65,7 +50,22 @@ class Category
 
     #[ORM\OneToMany(mappedBy: 'category', targetEntity: Ssd::class)]
     private Collection $ssds;
-
+    public function __construct()
+    {
+        $this->setCreatedAt(new DateTimeImmutable());
+        $this->boitiers = new ArrayCollection();
+        $this->alimentations = new ArrayCollection();
+        $this->processeurs = new ArrayCollection();
+        $this->carteMeres = new ArrayCollection();
+        $this->carteGraphiques = new ArrayCollection();
+        $this->rams = new ArrayCollection();
+        $this->hdds = new ArrayCollection();
+        $this->ssds = new ArrayCollection();
+    }
+    public function __toString()
+    {
+        return $this->getName();
+    }
 
     public function getId(): ?int
     {
@@ -118,7 +118,7 @@ class Category
 
     public function addBoitier(Boitier $boitier): self
     {
-        if (!$this->boitiers->contains($boitier)) {
+        if (! $this->boitiers->contains($boitier)) {
             $this->boitiers->add($boitier);
             $boitier->setCategory($this);
         }
@@ -148,7 +148,7 @@ class Category
 
     public function addAlimentation(Alimentation $alimentation): self
     {
-        if (!$this->alimentations->contains($alimentation)) {
+        if (! $this->alimentations->contains($alimentation)) {
             $this->alimentations->add($alimentation);
             $alimentation->setCategory($this);
         }
@@ -178,7 +178,7 @@ class Category
 
     public function addProcesseur(Processeur $processeur): self
     {
-        if (!$this->processeurs->contains($processeur)) {
+        if (! $this->processeurs->contains($processeur)) {
             $this->processeurs->add($processeur);
             $processeur->setCategory($this);
         }
@@ -208,7 +208,7 @@ class Category
 
     public function addCarteMere(CarteMere $carteMere): self
     {
-        if (!$this->carteMeres->contains($carteMere)) {
+        if (! $this->carteMeres->contains($carteMere)) {
             $this->carteMeres->add($carteMere);
             $carteMere->setCategory($this);
         }
@@ -238,7 +238,7 @@ class Category
 
     public function addCarteGraphique(CarteGraphique $carteGraphique): self
     {
-        if (!$this->carteGraphiques->contains($carteGraphique)) {
+        if (! $this->carteGraphiques->contains($carteGraphique)) {
             $this->carteGraphiques->add($carteGraphique);
             $carteGraphique->setCategory($this);
         }
@@ -268,7 +268,7 @@ class Category
 
     public function addRam(Ram $ram): self
     {
-        if (!$this->rams->contains($ram)) {
+        if (! $this->rams->contains($ram)) {
             $this->rams->add($ram);
             $ram->setCategory($this);
         }
@@ -298,7 +298,7 @@ class Category
 
     public function addHdd(Hdd $hdd): self
     {
-        if (!$this->hdds->contains($hdd)) {
+        if (! $this->hdds->contains($hdd)) {
             $this->hdds->add($hdd);
             $hdd->setCategory($this);
         }
@@ -328,7 +328,7 @@ class Category
 
     public function addSsd(Ssd $ssd): self
     {
-        if (!$this->ssds->contains($ssd)) {
+        if (! $this->ssds->contains($ssd)) {
             $this->ssds->add($ssd);
             $ssd->setCategory($this);
         }
@@ -347,5 +347,4 @@ class Category
 
         return $this;
     }
-
 }

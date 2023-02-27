@@ -1,12 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Entity;
 
-use App\Entity\Category;
+use App\Repository\CarteMereRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use App\Repository\CarteMereRepository;
 
 #[ORM\Entity(repositoryClass: CarteMereRepository::class)]
 class CarteMere
@@ -36,7 +37,6 @@ class CarteMere
     {
         $this->paniers = new ArrayCollection();
     }
-
 
     public function getId(): ?int
     {
@@ -74,7 +74,7 @@ class CarteMere
 
     public function getFormattedPrice(): ?string
     {
-        return number_format($this->price/100, 2, ',', ' ') .  '€';
+        return number_format($this->price / 100, 2, ',', ' ') .  '€';
     }
 
     public function setPrice(int $price): self
@@ -106,7 +106,7 @@ class CarteMere
 
     public function addPanier(Panier $panier): self
     {
-        if (!$this->paniers->contains($panier)) {
+        if (! $this->paniers->contains($panier)) {
             $this->paniers->add($panier);
             $panier->setCarteMere($this);
         }
@@ -125,5 +125,4 @@ class CarteMere
 
         return $this;
     }
-
 }

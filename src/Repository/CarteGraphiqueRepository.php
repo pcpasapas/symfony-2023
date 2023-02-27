@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Repository;
 
 use App\Entity\CarteGraphique;
@@ -11,8 +13,8 @@ use Doctrine\Persistence\ManagerRegistry;
  *
  * @method CarteGraphique|null find($id, $lockMode = null, $lockVersion = null)
  * @method CarteGraphique|null findOneBy(array $criteria, array $orderBy = null)
- * @method CarteGraphique[]    findAll()
- * @method CarteGraphique[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method array<CarteGraphique> findAll()
+ * @method array<CarteGraphique> findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
 class CarteGraphiqueRepository extends ServiceEntityRepository
 {

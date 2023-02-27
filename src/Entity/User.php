@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Entity;
 
 use App\Repository\UserRepository;
@@ -18,19 +20,24 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?int $id = null;
 
     #[ORM\Column(length: 180, unique: true)]
-    private ?string $email = null;
+    private string $email;
 
     #[ORM\Column]
+    /**
+     * Summary of roles
+     *
+     * @var array{string, string}
+     */
     private array $roles = [];
 
     /**
      * @var string The hashed password
      */
     #[ORM\Column]
-    private ?string $password = null;
+    private string $password;
 
-    #[ORM\OneToOne(mappedBy: 'user', cascade: ['persist', 'remove'])]
-    private ?Panier $panier = null;
+    // #[ORM\OneToMany(mappedBy: 'user', cascade: ['persist', 'remove'])]
+    // private ?Panier $panier = null;
 
     public function getId(): ?int
     {
@@ -96,31 +103,31 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @see UserInterface
      */
-    public function eraseCredentials()
+    public function eraseCredentials(): void
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
     }
 
-    public function getPanier(): ?Panier
-    {
-        return $this->panier;
-    }
+    // public function getPanier(): ?Panier
+    // {
+    //     return $this->panier;
+    // }
 
-    public function setPanier(?Panier $panier): self
-    {
-        // unset the owning side of the relation if necessary
-        if ($panier === null && $this->panier !== null) {
-            $this->panier->setUser(null);
-        }
+    // public function setPanier(?Panier $panier): self
+    // {
+    //     // unset the owning side of the relation if necessary
+    //     if ($panier === null && $this->panier !== null) {
+    //         $this->panier->setUser(null);
+    //     }
 
-        // set the owning side of the relation if necessary
-        if ($panier !== null && $panier->getUser() !== $this) {
-            $panier->setUser($this);
-        }
+    //     // set the owning side of the relation if necessary
+    //     if ($panier !== null && $panier->getUser() !== $this) {
+    //         $panier->setUser($this);
+    //     }
 
-        $this->panier = $panier;
+    //     $this->panier = $panier;
 
-        return $this;
-    }
+    //     return $this;
+    // }
 }

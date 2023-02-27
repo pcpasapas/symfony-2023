@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Entity;
 
 use App\Repository\AlimentationRepository;
@@ -16,7 +18,7 @@ class Alimentation
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $name = null;
+    private string $name;
 
     #[ORM\Column(length: 255)]
     private ?string $modele = null;
@@ -41,7 +43,6 @@ class Alimentation
     {
         $this->paniers = new ArrayCollection();
     }
-
 
     public function getId(): ?int
     {
@@ -111,7 +112,7 @@ class Alimentation
 
     public function addPanier(Panier $panier): self
     {
-        if (!$this->paniers->contains($panier)) {
+        if (! $this->paniers->contains($panier)) {
             $this->paniers->add($panier);
             $panier->setAlimentation($this);
         }

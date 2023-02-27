@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Entity;
 
 use App\Repository\SsdRepository;
@@ -16,13 +18,13 @@ class Ssd
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $name = null;
+    private string $name;
 
     #[ORM\Column(length: 255)]
-    private ?string $modele = null;
+    private string $modele;
 
     #[ORM\Column]
-    private ?int $price = null;
+    private int $price;
 
     #[ORM\ManyToOne(inversedBy: 'ssds')]
     #[ORM\JoinColumn(nullable: true)]
@@ -30,7 +32,6 @@ class Ssd
 
     #[ORM\OneToMany(mappedBy: 'ssd', targetEntity: Panier::class)]
     private Collection $paniers;
-
 
     public function __construct()
     {
@@ -73,7 +74,7 @@ class Ssd
 
     public function getFormattedPrice(): ?string
     {
-        return number_format($this->price/100, 2, ',', ' ') .  '€';
+        return number_format($this->price / 100, 2, ',', ' ') .  '€';
     }
 
     public function setPrice(int $price): self
@@ -105,7 +106,7 @@ class Ssd
 
     public function addPanier(Panier $panier): self
     {
-        if (!$this->paniers->contains($panier)) {
+        if (! $this->paniers->contains($panier)) {
             $this->paniers->add($panier);
             $panier->setSsd($this);
         }
@@ -124,5 +125,4 @@ class Ssd
 
         return $this;
     }
-
 }

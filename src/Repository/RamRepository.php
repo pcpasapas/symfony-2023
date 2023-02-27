@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Repository;
 
 use App\Entity\Ram;
@@ -11,8 +13,8 @@ use Doctrine\Persistence\ManagerRegistry;
  *
  * @method Ram|null find($id, $lockMode = null, $lockVersion = null)
  * @method Ram|null findOneBy(array $criteria, array $orderBy = null)
- * @method Ram[]    findAll()
- * @method Ram[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method array<Ram> findAll()
+ * @method array<Ram> findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
 class RamRepository extends ServiceEntityRepository
 {

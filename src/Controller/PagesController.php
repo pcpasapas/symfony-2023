@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controller;
 
 use App\Repository\PanierRepository;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class PagesController extends AbstractController
@@ -19,7 +21,7 @@ class PagesController extends AbstractController
         $panierUser = $panierRepository->findByUser($this->getUser());
         $error = $authenticationUtils->getLastAuthenticationError();
         $lastUsername = $authenticationUtils->getLastUsername();
-        return $this->render('accueil/index.html.twig', ['_fragment' => "index", 'last_username' => $lastUsername, 'error' => $error, 'panierUser' => $panierUser]);
+        return $this->render('accueil/index.html.twig', ['_fragment' => 'index', 'last_username' => $lastUsername, 'error' => $error, 'panierUser' => $panierUser]);
     }
 
     #[Route('/tutos', name: 'tuto_pages')]

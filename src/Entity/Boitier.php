@@ -1,20 +1,17 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Entity;
 
+use App\Repository\BoitierRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use App\Repository\BoitierRepository;
-
 
 #[ORM\Entity(repositoryClass: BoitierRepository::class)]
 class Boitier
 {
-    public function __construct()
-    {
-        $this->paniers = new ArrayCollection();
-    }
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -41,8 +38,10 @@ class Boitier
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $lien = null;
-
-
+    public function __construct()
+    {
+        $this->paniers = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -80,7 +79,7 @@ class Boitier
 
     public function getFormattedPrice(): ?string
     {
-        return number_format($this->price/100, 2, ',', ' ') .  '€';
+        return number_format($this->price / 100, 2, ',', ' ') .  '€';
     }
 
     public function setPrice(int $price): self
@@ -97,7 +96,6 @@ class Boitier
 
     public function setCategory(?Category $category): self
     {
-        dd($category);
         $this->category = $category;
 
         return $this;
@@ -113,7 +111,7 @@ class Boitier
 
     public function addPanier(Panier $panier): self
     {
-        if (!$this->paniers->contains($panier)) {
+        if (! $this->paniers->contains($panier)) {
             $this->paniers->add($panier);
             $panier->setBoitier($this);
         }
@@ -156,5 +154,4 @@ class Boitier
 
         return $this;
     }
-
 }

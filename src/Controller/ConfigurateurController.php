@@ -1,38 +1,38 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controller;
 
-use App\Entity\Panier;
-use App\Entity\Boitier;
 use App\Entity\Category;
-use App\Models\Categorie;
-use App\Repository\PanierRepository;
+use App\Entity\Panier;
 use App\Repository\CategoryRepository;
+use App\Repository\PanierRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\RequestStack;
 
 class ConfigurateurController extends AbstractController
 {
     private $categories;
 
-    public function __construct(private CategoryRepository $categoryRepository, private PanierRepository $panierRepository, private RequestStack $requestStack)
+    public function __construct(CategoryRepository $categoryRepository, private PanierRepository $panierRepository, private RequestStack $requestStack)
     {
         $this->categories = $categoryRepository->findAll();
     }
 
-    public function getSomme($panier): string {
+    public function getSomme($panier): string
+    {
         $somme = 0;
         foreach ($panier as $item) {
-            if ($item != null) {
+            if ($item !== null) {
                 $somme += $item->getPrice();
             }
         }
-        return number_format($somme/100, 2, ',', ' ') .  '€';;
+        return number_format($somme / 100, 2, ',', ' ') .  '€';
     }
 
     #[Route('/configurateur/new', name: 'configurateur.new')]
@@ -49,49 +49,49 @@ class ConfigurateurController extends AbstractController
         $session = $request->getSession();
         $session->set('panier', $panier->getId());
 
-
         $panier = $this->panierRepository->getPanierInArray($session->get('panier'));
         return $this->render('configurateur/layout.html.twig', [
             'categories' => $this->categories,
             'composants' => null,
             'panier' => $panier,
-            'somme' => $this->getSomme($panier)
+            'somme' => $this->getSomme($panier),
         ]);
     }
-
-
 
     #[Route('/configurateur', name: 'configurateur')]
     public function index(Request $request): Response
     {
         // stockage du panier dans la session
         $session = $request->getSession();
+
         if ($request->get('panier')) {
             $session->set('panier', $request->get('panier'));
+        }
+        if ($session->get('panier')) {
+            $panier = $this->panierRepository->getPanierInArray($session->get('panier'));
         } else {
             return $this->redirectToRoute('configurateur.new');
         }
-        $panier = $this->panierRepository->getPanierInArray($session->get('panier'));
+
         return $this->render('configurateur/layout.html.twig', [
             'categories' => $this->categories,
             'composants' => null,
             'panier' => $panier,
-            'somme' => $this->getSomme($panier)
+            'somme' => $this->getSomme($panier),
         ]);
     }
-    
+
     #[Route('/configurateur/add/{slug}/{id}', name: 'addCart')]
     public function addCart(string $slug, $id, ManagerRegistry $doctrine, Request $request): Response
     {
-        $categorie = $doctrine->getRepository(Category::class)->findOneBy(array('slug' => $slug));
+        $categorie = $doctrine->getRepository(Category::class)->findOneBy(['slug' => $slug]);
         $em = $doctrine->getManager();
-        $class = "App\\Entity\\" . $categorie->getSlug();
+        $class = 'App\\Entity\\' . $categorie->getSlug();
         $composant = $doctrine->getRepository($class)->find($id);
         $session = $request->getSession();
         $panier = $doctrine->getRepository(Panier::class)->find($session->get('panier'));
 
-
-        $methode = "set" . $categorie->getSlug();   
+        $methode = 'set' . $categorie->getSlug();
         $panier->$methode($composant);
         $em->flush();
 
@@ -105,7 +105,7 @@ class ConfigurateurController extends AbstractController
         $session = $request->getSession();
 
         $panier = $doctrine->getRepository(Panier::class)->find($session->get('panier'));
-        $methode = "set" . $categorie;
+        $methode = 'set' . $categorie;
         $panier->$methode(null);
         $em->flush();
         return $this->redirectToRoute('configurateur');
@@ -114,13 +114,10 @@ class ConfigurateurController extends AbstractController
     #[Route('/configurateur/{slug}', name: 'configurateur.cat')]
     /**
      * retourne la page configurateur avec les comoposants de la category
-     * @param Category $category
-     * @param ManagerRegistry $doctrine
-     * @return Response
      */
     public function categorie(Category $category, ManagerRegistry $doctrine): Response
     {
-        $class = "App\\Entity\\" . $category->getSlug();
+        $class = 'App\\Entity\\' . $category->getSlug();
         $repo = $doctrine->getRepository($class);
         $composants = $repo->findAll();
 
@@ -130,9 +127,7 @@ class ConfigurateurController extends AbstractController
             'categories' => $this->categories,
             'composants' => $composants,
             'panier' => $this->panierRepository->getPanierInArray($session->get('panier')),
-            'somme' => $this->getSomme($this->panierRepository->getPanierInArray($session->get('panier')))
+            'somme' => $this->getSomme($this->panierRepository->getPanierInArray($session->get('panier'))),
         ]);
     }
-
-
 }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Repository;
 
 use App\Entity\Alimentation;
@@ -11,8 +13,8 @@ use Doctrine\Persistence\ManagerRegistry;
  *
  * @method Alimentation|null find($id, $lockMode = null, $lockVersion = null)
  * @method Alimentation|null findOneBy(array $criteria, array $orderBy = null)
- * @method Alimentation[]    findAll()
- * @method Alimentation[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method array<Alimentation> findAll()
+ * @method array<Alimentation> findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
 class AlimentationRepository extends ServiceEntityRepository
 {
