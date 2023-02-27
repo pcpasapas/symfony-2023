@@ -68,6 +68,8 @@ class ConfigurateurController extends AbstractController
         $session = $request->getSession();
         if ($request->get('panier')) {
             $session->set('panier', $request->get('panier'));
+        } else {
+            return $this->redirectToRoute('configurateur.new');
         }
         $panier = $this->panierRepository->getPanierInArray($session->get('panier'));
         return $this->render('configurateur/layout.html.twig', [
