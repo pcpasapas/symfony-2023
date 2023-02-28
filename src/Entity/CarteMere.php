@@ -33,6 +33,15 @@ class CarteMere
     #[ORM\OneToMany(mappedBy: 'carteMere', targetEntity: Panier::class)]
     private Collection $paniers;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $socket = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $format = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $lien = null;
+
     public function __construct()
     {
         $this->paniers = new ArrayCollection();
@@ -122,6 +131,42 @@ class CarteMere
                 $panier->setCarteMere(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getSocket(): ?string
+    {
+        return $this->socket;
+    }
+
+    public function setSocket(?string $socket): self
+    {
+        $this->socket = $socket;
+
+        return $this;
+    }
+
+    public function getFormat(): ?string
+    {
+        return $this->format;
+    }
+
+    public function setFormat(?string $format): self
+    {
+        $this->format = $format;
+
+        return $this;
+    }
+
+    public function getLien(): ?string
+    {
+        return $this->lien;
+    }
+
+    public function setLien(?string $lien): self
+    {
+        $this->lien = $lien;
 
         return $this;
     }

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Repository;
 
+use App\Entity\Panier;
 use App\Entity\Processeur;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -11,8 +12,8 @@ use Doctrine\Persistence\ManagerRegistry;
 /**
  * @extends ServiceEntityRepository<Processeur>
  *
- * @method Processeur|null find($id, $lockMode = null, $lockVersion = null)
- * @method Processeur|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Processeur|null   find($id, $lockMode = null, $lockVersion = null)
+ * @method Processeur|null   findOneBy(array $criteria, array $orderBy = null)
  * @method array<Processeur> findAll()
  * @method array<Processeur> findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
@@ -40,6 +41,27 @@ class ProcesseurRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
+
+   /**
+    * @return Processeur[] Returns an array of CarteMere objects
+    */
+   public function findAllByPanier(Panier $panier): array
+   {
+       if (null != $panier->getCarteMere()) {
+           $socket = $panier->getCarteMere()->getSocket();
+       } else {
+           return $this->findAll();
+       }
+
+       return $this->createQueryBuilder('c')
+           ->andWhere('c.socket = :val')
+           ->setParameter('val', $socket)
+           ->orderBy('c.price', 'ASC')
+           ->setMaxResults(10)
+           ->getQuery()
+           ->getResult()
+       ;
+   }
 
 //    /**
 //     * @return Processeur[] Returns an array of Processeur objects

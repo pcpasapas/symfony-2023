@@ -28,11 +28,12 @@ class ConfigurateurController extends AbstractController
     {
         $somme = 0;
         foreach ($panier as $item) {
-            if ($item !== null) {
+            if (null !== $item) {
                 $somme += $item->getPrice();
             }
         }
-        return number_format($somme / 100, 2, ',', ' ') .  '€';
+
+        return number_format($somme / 100, 2, ',', ' ').'€';
     }
 
     #[Route('/configurateur/new', name: 'configurateur.new')]
@@ -50,6 +51,7 @@ class ConfigurateurController extends AbstractController
         $session->set('panier', $panier->getId());
 
         $panier = $this->panierRepository->getPanierInArray($session->get('panier'));
+
         return $this->render('configurateur/layout.html.twig', [
             'categories' => $this->categories,
             'composants' => null,
@@ -86,12 +88,12 @@ class ConfigurateurController extends AbstractController
     {
         $categorie = $doctrine->getRepository(Category::class)->findOneBy(['slug' => $slug]);
         $em = $doctrine->getManager();
-        $class = 'App\\Entity\\' . $categorie->getSlug();
+        $class = 'App\\Entity\\'.$categorie->getSlug();
         $composant = $doctrine->getRepository($class)->find($id);
         $session = $request->getSession();
         $panier = $doctrine->getRepository(Panier::class)->find($session->get('panier'));
 
-        $methode = 'set' . $categorie->getSlug();
+        $methode = 'set'.$categorie->getSlug();
         $panier->$methode($composant);
         $em->flush();
 
@@ -105,21 +107,31 @@ class ConfigurateurController extends AbstractController
         $session = $request->getSession();
 
         $panier = $doctrine->getRepository(Panier::class)->find($session->get('panier'));
-        $methode = 'set' . $categorie;
+        $methode = 'set'.$categorie;
         $panier->$methode(null);
         $em->flush();
+
         return $this->redirectToRoute('configurateur');
     }
 
     #[Route('/configurateur/{slug}', name: 'configurateur.cat')]
     /**
-     * retourne la page configurateur avec les comoposants de la category
+     * retourne la page configurateur avec les comoposants de la category.
      */
-    public function categorie(Category $category, ManagerRegistry $doctrine): Response
+    public function categorie(Category $category, ManagerRegistry $doctrine, Request $request): Response
     {
-        $class = 'App\\Entity\\' . $category->getSlug();
+        $class = 'App\\Entity\\'.$category->getSlug();
         $repo = $doctrine->getRepository($class);
-        $composants = $repo->findAll();
+
+        // recuperation du panier
+        $session = $request->getSession();
+        $panier = $doctrine->getRepository(Panier::class)->find($session->get('panier'));
+
+        if ('Processeur' == $category->getSlug() || 'CarteMere' == $category->getSlug()) {
+            $composants = $repo->findAllByPanier($panier);
+        } else {
+            $composants = $repo->findAll();
+        }
 
         $session = $this->requestStack->getSession();
 

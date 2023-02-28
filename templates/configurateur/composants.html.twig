@@ -1,18 +1,42 @@
 <div class="d-flex">
-{% for composant in composants %}
-	<div class="card" style="width: 18rem;">
-		<img src="{{ asset("./images/") ~ composant.category.slug ~ ("/") ~ composant.id ~ (".jpg") }}" class="card-img-top" alt="image du composant" />
-		<div class="card-body">
-			<h5 class="card-title">
-				{{ composant.name }}
-			</h5>
-			<p class="card-text">
-				{{ composant.modele }}
-			</p>
-            <p class="card-text">
-				{{ composant.getFormattedPrice }}
-			</p>
-			<a href="{{ path('addCart', {'slug' : composant.category.slug, 'id' : composant.id }) }}" class="btn btn-primary">Ajouter au panier</a>
+	{% for composant in composants %}
+		<div class="card" style="width: 18rem;">
+			<img src="{{ asset('./images/') ~ composant.category.slug ~ '/' ~ composant.id ~ '.jpg' }}"
+				class="card-img-top"
+				alt="image du composant" />
+			<div class="card-body">
+				<h5 class="card-title">
+					{{ composant.name }}
+				</h5>
+				<p class="card-text">
+					{{ composant.modele }}
+				</p>
+				{% if composant.format is defined %}
+					<p class="card-text">
+						Format : {{ composant.format }}
+					</p>
+				{% endif %}
+				{% if composant.socket is defined %}
+					<p class="card-text">
+						Socket : {{ composant.socket }}
+					</p>
+				{% endif %}
+				<p class="card-text">
+					{{ composant.getFormattedPrice }}
+				</p>
+				<a href="{{
+					path(
+						'addCart',
+						{
+							slug: composant.category.slug,
+							id: composant.id
+						}
+					)
+					}}"
+					class="btn btn-primary">
+					Ajouter au panier
+				</a>
+			</div>
 		</div>
-	</div>
-{% endfor %}
+	{% endfor %}
+</div>

@@ -33,6 +33,15 @@ class Processeur
     #[ORM\OneToMany(mappedBy: 'processeur', targetEntity: Panier::class)]
     private Collection $paniers;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $socket = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?float $puissance_min = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?float $puissance_boost = null;
+
     public function __construct()
     {
         $this->paniers = new ArrayCollection();
@@ -122,6 +131,42 @@ class Processeur
                 $panier->setProcesseur(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getSocket(): ?string
+    {
+        return $this->socket;
+    }
+
+    public function setSocket(?string $socket): self
+    {
+        $this->socket = $socket;
+
+        return $this;
+    }
+
+    public function getPuissanceMin(): ?float
+    {
+        return $this->puissance_min;
+    }
+
+    public function setPuissanceMin(?float $puissance_min): self
+    {
+        $this->puissance_min = $puissance_min;
+
+        return $this;
+    }
+
+    public function getPuissanceBoost(): ?float
+    {
+        return $this->puissance_boost;
+    }
+
+    public function setPuissanceBoost(?float $puissance_boost): self
+    {
+        $this->puissance_boost = $puissance_boost;
 
         return $this;
     }
