@@ -21,6 +21,11 @@
 						Socket : {{ composant.socket }}
 					</p>
 				{% endif %}
+				{% if composant.puissance_min is defined %}
+					<p class="card-text">
+						Puissance min : {{ composant.puissance_min }} Ghz
+					</p>
+				{% endif %}
 				<p class="card-text">
 					{{ composant.getFormattedPrice }}
 				</p>
