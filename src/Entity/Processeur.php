@@ -42,6 +42,9 @@ class Processeur
     #[ORM\Column(nullable: true)]
     private ?float $puissance_boost = null;
 
+    #[ORM\Column(length: 50, nullable: true)]
+    private ?string $modele_min = null;
+
     public function __construct()
     {
         $this->paniers = new ArrayCollection();
@@ -167,6 +170,18 @@ class Processeur
     public function setPuissanceBoost(?float $puissance_boost): self
     {
         $this->puissance_boost = $puissance_boost;
+
+        return $this;
+    }
+
+    public function getModeleMin(): ?string
+    {
+        return $this->modele_min;
+    }
+
+    public function setModeleMin(?string $modele_min): self
+    {
+        $this->modele_min = $modele_min;
 
         return $this;
     }

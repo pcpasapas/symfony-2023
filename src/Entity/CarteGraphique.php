@@ -33,6 +33,18 @@ class CarteGraphique
     #[ORM\OneToMany(mappedBy: 'carteGraphique', targetEntity: Panier::class)]
     private Collection $paniers;
 
+    #[ORM\Column(nullable: true)]
+    private ?int $capacite = null;
+
+    #[ORM\Column(length: 50, nullable: true)]
+    private ?string $modele_min = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?int $puissance_min = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $lien = null;
+
     public function __construct()
     {
         $this->paniers = new ArrayCollection();
@@ -122,6 +134,54 @@ class CarteGraphique
                 $panier->setCarteGraphique(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCapacite(): ?int
+    {
+        return $this->capacite;
+    }
+
+    public function setCapacite(?int $capacite): self
+    {
+        $this->capacite = $capacite;
+
+        return $this;
+    }
+
+    public function getModeleMin(): ?string
+    {
+        return $this->modele_min;
+    }
+
+    public function setModeleMin(?string $modele_min): self
+    {
+        $this->modele_min = $modele_min;
+
+        return $this;
+    }
+
+    public function getPuissanceMin(): ?int
+    {
+        return $this->puissance_min;
+    }
+
+    public function setPuissanceMin(?int $puissance_min): self
+    {
+        $this->puissance_min = $puissance_min;
+
+        return $this;
+    }
+
+    public function getLien(): ?string
+    {
+        return $this->lien;
+    }
+
+    public function setLien(?string $lien): self
+    {
+        $this->lien = $lien;
 
         return $this;
     }

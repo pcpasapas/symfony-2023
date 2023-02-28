@@ -1,5 +1,5 @@
 <div class="mt-3">
-	Panier n° {{ (app.session.get('panier')) }}
+	Panier n° {{ app.session.get('panier') }}
 	<table class="table table-striped table-secondary">
 		<thead>
 			<tr>
@@ -51,7 +51,10 @@
 			{% endfor %}
 		</tbody>
 	</table>
-        <p>{{ somme }}</p>
+	<p>
+		{{ somme }}
+	</p>
+	<div class="hr-min mx-auto my-3" id="connect"></div>
 
 	{# <p>{{panier.boitier.name}} {{panier.boitier.getFormattedPrice()}}</p>
     <p>{{panier.alimentation.name }} {{panier.alimentation.getFormattedPrice()}}</p>
@@ -60,3 +63,6 @@
     <p>{{panier.carteGraphique.name }} {{panier.carteGraphique.getFormattedPrice()}}</p>
     <p>{{panier.ram.name }} {{panier.ram.getFormattedPrice()}}</p> #}
 </div>
+<style>
+	.hr-min { border-top: 0.4em solid #37123C; border-radius: 1em; text-align: center; width: 85%; }
+</style>

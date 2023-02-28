@@ -33,6 +33,12 @@ class Ssd
     #[ORM\OneToMany(mappedBy: 'ssd', targetEntity: Panier::class)]
     private Collection $paniers;
 
+    #[ORM\Column(nullable: true)]
+    private ?int $capacite = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $lien = null;
+
     public function __construct()
     {
         $this->paniers = new ArrayCollection();
@@ -122,6 +128,30 @@ class Ssd
                 $panier->setSsd(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCapacite(): ?int
+    {
+        return $this->capacite;
+    }
+
+    public function setCapacite(?int $capacite): self
+    {
+        $this->capacite = $capacite;
+
+        return $this;
+    }
+
+    public function getLien(): ?string
+    {
+        return $this->lien;
+    }
+
+    public function setLien(?string $lien): self
+    {
+        $this->lien = $lien;
 
         return $this;
     }

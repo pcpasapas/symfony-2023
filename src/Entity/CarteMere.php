@@ -42,6 +42,9 @@ class CarteMere
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $lien = null;
 
+    #[ORM\Column(length: 50, nullable: true)]
+    private ?string $modele_min = null;
+
     public function __construct()
     {
         $this->paniers = new ArrayCollection();
@@ -167,6 +170,18 @@ class CarteMere
     public function setLien(?string $lien): self
     {
         $this->lien = $lien;
+
+        return $this;
+    }
+
+    public function getModeleMin(): ?string
+    {
+        return $this->modele_min;
+    }
+
+    public function setModeleMin(?string $modele_min): self
+    {
+        $this->modele_min = $modele_min;
 
         return $this;
     }
