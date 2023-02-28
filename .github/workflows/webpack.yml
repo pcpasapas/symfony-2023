@@ -25,5 +25,4 @@ jobs:
    - name: Build
      run: |
       npm install --force
-      npm install @symfony/ux-turbo
       npm run build
