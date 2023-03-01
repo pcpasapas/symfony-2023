@@ -82,6 +82,10 @@ class ConfigurateurController extends AbstractController
             if (null != $this->panierRepository->find($request->get('panier'))) {
                 if ($this->getUser() == $this->panierRepository->find($request->get('panier'))->getUser()) {
                     $session->set('panier', $request->get('panier'));
+                } else {
+                    $this->addFlash('danger', 'Panier inexistant');
+
+                    return $this->redirectToRoute('app_login');
                 }
             } else {
                 $this->addFlash('danger', 'Panier inexistant');
@@ -89,6 +93,7 @@ class ConfigurateurController extends AbstractController
                 return $this->redirectToRoute('app_login');
             }
         }
+
         if ($session->get('panier')) {
             $panier = $this->panierRepository->getPanierInArray($session->get('panier'));
         } else {
