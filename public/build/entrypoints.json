@@ -2,12 +2,12 @@
   "entrypoints": {
     "app": {
       "js": [
-        "/build/runtime.bff8fc39.js",
-        "/build/435.352053cf.js",
-        "/build/app.85e2f83f.js"
+        "http://localhost:8080/build/runtime.js",
+        "http://localhost:8080/build/vendors-node_modules_bootstrap_dist_js_bootstrap_esm_js-node_modules_mini-css-extract-plugin_-ea587f.js",
+        "http://localhost:8080/build/app.js"
       ],
       "css": [
-        "/build/app.e8b25892.css"
+        "http://localhost:8080/build/app.css"
       ]
     }
   }

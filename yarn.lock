@@ -920,15 +920,10 @@
   resolved "https://registry.npmjs.org/@hotwired/stimulus-webpack-helpers/-/stimulus-webpack-helpers-1.0.1.tgz"
   integrity sha512-wa/zupVG0eWxRYJjC1IiPBdt3Lruv0RqGN+/DTMmUWUyMAEB27KXmVY6a8YpUVTM7QwVuaLNGW4EqDgrS2upXQ==
 
-"@hotwired/stimulus@^3.0", "@hotwired/stimulus@^3.0.0", "@hotwired/stimulus@>= 3.0":
+"@hotwired/stimulus@^3.0", "@hotwired/stimulus@>= 3.0":
   version "3.2.1"
   resolved "https://registry.npmjs.org/@hotwired/stimulus/-/stimulus-3.2.1.tgz"
   integrity sha512-HGlzDcf9vv/EQrMJ5ZG6VWNs8Z/xMN+1o2OhV1gKiSG6CqZt5MCBB1gRg5ILiN3U0jEAxuDTNPRfBcnZBDmupQ==
-
-"@hotwired/turbo@^7.0.1":
-  version "7.2.5"
-  resolved "https://registry.npmjs.org/@hotwired/turbo/-/turbo-7.2.5.tgz"
-  integrity sha512-o5PByC/mWkmTe4pWnKrixhPECJUxIT/NHtxKqjq7n9Fj6JlNza1pgxdTCJVIq+PI0j95U+7mA3N4n4A/QYZtZQ==
 
 "@jest/schemas@^29.4.3":
   version "29.4.3"
@@ -1031,7 +1026,7 @@
   resolved "https://registry.npmjs.org/@sinclair/typebox/-/typebox-0.25.24.tgz"
   integrity sha512-XJfwUVUKDHF5ugKwIcxEgc9k8b7HbznCp6eUfWgu710hMPNIO4aw4/zB5RogDQz8nd6gyCDpU9O/m6qYEWY6yQ==
 
-"@symfony/stimulus-bridge@^3.0.0", "@symfony/stimulus-bridge@^3.2.0":
+"@symfony/stimulus-bridge@^3.0.0":
   version "3.2.1"
   resolved "https://registry.npmjs.org/@symfony/stimulus-bridge/-/stimulus-bridge-3.2.1.tgz"
   integrity sha512-eawmVu+tLVkiTz7ewkcsxFvaSZKxFWXmdWxIsxr2jIfQ64PSJg7PIcd7GsPMDxX8sLwg3LGxXfJv5bASL1es+A==
@@ -1041,10 +1036,6 @@
     acorn "^8.0.5"
     loader-utils "^2.0.0"
     schema-utils "^3.0.0"
-
-"@symfony/ux-turbo@file:vendor/symfony/ux-turbo/assets":
-  version "0.1.0"
-  resolved "file:vendor/symfony/ux-turbo/assets"
 
 "@symfony/webpack-encore@^4.0.0":
   version "4.2.0"

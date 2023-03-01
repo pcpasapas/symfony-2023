@@ -1,56 +1,52 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">    
-    <meta name="description" content="Site de comparaison de matériel informatique.">
-    <meta name="google-site-verification" content="hgrnQJruiGm9EiwhZSSUQAlVITO6BBIC7ciG5E6suhM" />
-    <title>Pc pas à pas - {% block title %}{% endblock %}</title>
-    <link rel="icon" href="{{ asset('favicon.ico') }}" />
-        <!-- Google tag (gtag.js) -->
-        <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-153ZZY7C5M"></script>
-        <script>
-            window.dataLayer = window.dataLayer || [];
-    
-            function gtag() {
-                dataLayer.push(arguments);
-            }
-            gtag('js', new Date());
-    
-            gtag('config', 'G-153ZZY7C5M');
-     -->
-        </script>
-        <!-- GOOGLE ADSENSE -->
-        {# <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2401412736769800" crossorigin="anonymous"></script> #}
-        <!-- GOOGLE ADSENSE END -->
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="description" content="Site de comparaison de matériel informatique." />
+		<meta name="google-site-verification" content="hgrnQJruiGm9EiwhZSSUQAlVITO6BBIC7ciG5E6suhM" />
+		<title>
+			Pc pas à pas -{% block title %}
+			{% endblock %}
+		</title>
+		<link rel="icon" href="{{ asset('favicon.ico') }}" />
+		<!-- Google tag (gtag.js) -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=G-153ZZY7C5M"></script>
+		<script>
+			window.dataLayer = window.dataLayer || [];
 
-    {% block stylesheets %}
-        {{ encore_entry_link_tags('app') }}
-    {% endblock %}
+			function gtag() { dataLayer.push(arguments); } gtag('js', new Date());
 
-    {% block javascripts %}
-        {{ encore_entry_script_tags('app') }}
-    {% endblock %}
-</head>
-<body id='index'>
-    {% include "partials/navbar.html.twig" %}
-            {% for message in app.flashes('danger') %}
-            <div class="alert alert-danger">
-                {{ message }}
-            </div>
-        {% endfor %}
-    {% block body %}{% endblock %}
-</body>
+			gtag('config', 'G-153ZZY7C5M');
+		</script>
+		<!-- GOOGLE ADSENSE -->
+		<script async
+			src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2401412736769800"
+			crossorigin="anonymous"></script>
+		<!-- GOOGLE ADSENSE END -->
+
+		{% block stylesheets %}
+			{{ encore_entry_link_tags('app') }}
+		{% endblock %}
+
+		{% block javascripts %}
+			{{ encore_entry_script_tags('app') }}
+		{% endblock %}
+	</head>
+	<body id="index">
+		{% include 'partials/navbar.html.twig' %}
+		{% for message in app.flashes('danger') %}
+			<div class="alert alert-danger">
+				{{ message }}
+			</div>
+		{% endfor %}
+		{% block body %}
+		{% endblock %}
+	</body>
 </html>
 
 <style>
-    body {
-        font-family: "Labrada" !important;
-    }
+	body { font-family: "Labrada" !important; }
 
-    a {
-        text-decoration: none;
-        color: inherit
-    }
-
+	a { text-decoration: none; color: inherit }
 </style>
