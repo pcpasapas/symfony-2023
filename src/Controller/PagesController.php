@@ -17,6 +17,7 @@ class PagesController extends AbstractController
         //     return $this->redirectToRoute('target_path');
         // }
         $panierUser = $panierRepository->findByUser($this->getUser());
+
         $error = $authenticationUtils->getLastAuthenticationError();
         $lastUsername = $authenticationUtils->getLastUsername();
 

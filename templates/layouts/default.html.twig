@@ -34,6 +34,11 @@
 </head>
 <body id='index'>
     {% include "partials/navbar.html.twig" %}
+            {% for message in app.flashes('danger') %}
+            <div class="alert alert-danger">
+                {{ message }}
+            </div>
+        {% endfor %}
     {% block body %}{% endblock %}
 </body>
 </html>

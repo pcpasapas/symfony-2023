@@ -6,7 +6,7 @@
 		<h2 class="text-center mx-auto my-3 text-secondary" style="font-family: Mynerve">
 			Créez votre ordinateur sur mesure
 		</h2>
-		{% if app.session.get('panier') != null %}
+		{% if app.session.get('panier') != null and panierUser is defined %}
 			{% if panierUser != null %}
 				<a href="{{ path('configurateur') }}" class="text-center mb-3">
 					<button class="text-center mx-auto my-3 fs-5 bg-primary border border-secondary py-2 rounded animate__animated animate__pulse animate__infinite infinite">

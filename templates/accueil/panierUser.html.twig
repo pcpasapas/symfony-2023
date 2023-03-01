@@ -1,40 +1,42 @@
 <div>
-	{% if panierUser != null %}
+	{% if panierUser is defined and panierUser != null %}
 		<p>
 			Reprendre vos anciennes configurations :
 		</p>
 	{% endif %}
 
-	{% for item in panierUser %}
-		<div class="d-flex mb-2 justify-content-center align-items-center">
-			<a href="{{
-				path(
-					'configurateur',
-					{
-						panier: item.id
-					}
-				)
-				}}">
-				<button class="btn btn-primary">
-					{% if item.name != null %}
-						<h5 class="d-inline">
-							{{ item.name }}
-						</h5>
-					{% endif %}
-					{{ item.getCreatedAt()|format_datetime('full', 'short', locale = 'fr') }}
-				</button>
-			</a>
-			<form action="{{
-				path(
-					'removeUserCart',
-					{
-						panier: item.id
-					}
-				)
-				}}"
-				method="post">
-				<button type="submit" class="btn btn-danger">X</button>
-			</form>
-		</div>
-	{% endfor %}
+	{% if panierUser is defined %}
+		{% for item in panierUser %}
+			<div class="d-flex mb-2 justify-content-center align-items-center">
+				<a href="{{
+					path(
+						'configurateur',
+						{
+							panier: item.id
+						}
+					)
+					}}">
+					<button class="btn btn-primary">
+						{% if item.name != null %}
+							<h5 class="d-inline">
+								{{ item.name }}
+							</h5>
+						{% endif %}
+						{{ item.getCreatedAt()|format_datetime('full', 'short', locale = 'fr') }}
+					</button>
+				</a>
+				<form action="{{
+					path(
+						'removeUserCart',
+						{
+							panier: item.id
+						}
+					)
+					}}"
+					method="post">
+					<button type="submit" class="btn btn-danger">X</button>
+				</form>
+			</div>
+		{% endfor %}
+	{% endif %}
 </div>
