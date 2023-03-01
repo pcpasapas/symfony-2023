@@ -1,9 +1,12 @@
 <div>
-	<p>
-		Reprendre vos anciennes configurations :
-	</p>
-	{% for item in panierUser %}
+	{% if panierUser != null %}
 		<p>
+			Reprendre vos anciennes configurations :
+		</p>
+	{% endif %}
+
+	{% for item in panierUser %}
+		<div class="d-flex mb-2 justify-content-center align-items-center">
 			<a href="{{
 				path(
 					'configurateur',
@@ -12,11 +15,26 @@
 					}
 				)
 				}}">
-				<button class="btn btn-primary">{{ item.getCreatedAt()|format_datetime('full', 'short', locale = 'fr') }}</button>
+				<button class="btn btn-primary">
+					{% if item.name != null %}
+						<h5 class="d-inline">
+							{{ item.name }}
+						</h5>
+					{% endif %}
+					{{ item.getCreatedAt()|format_datetime('full', 'short', locale = 'fr') }}
+				</button>
 			</a>
-			<form action="{{ path('removeUserCart', {panier : item.id }) }}" method="post">
-				<button type="submit class="btn btn-danger">X</button>
+			<form action="{{
+				path(
+					'removeUserCart',
+					{
+						panier: item.id
+					}
+				)
+				}}"
+				method="post">
+				<button type="submit" class="btn btn-danger">X</button>
 			</form>
-		</p>
+		</div>
 	{% endfor %}
 </div>

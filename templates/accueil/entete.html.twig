@@ -1,46 +1,42 @@
-<div class="d-flex bg-white div-principale ">
-    <img class="w-50 img-composition mx-auto" src="{{ asset('images/compositionhdd.avif') }}" alt="composants d'un ordinateur">
-    <div class="mx-auto text-center">
-        <h2 class="text-center mx-auto my-3 text-secondary" style="font-family: Mynerve">Créez votre ordinateur sur mesure</h2>
-        {% if app.session.get('panier') != null %}
-            <a href="{{ path('configurateur') }}" class="text-center mb-3">
-                <button class="text-center mx-auto my-3 fs-5 bg-primary border border-secondary py-2 rounded animate__animated animate__pulse animate__infinite	infinite">
-                    Poursuivre votre dernière configuration
-                </button>
-             </a>
-        {% endif %}
-        <a href="{{ path('configurateur.new') }}" class="text-center">
-            <button class="text-center mx-auto my-3 fs-5 bg-primary border border-secondary py-2 rounded animate__animated animate__pulse animate__infinite	infinite" id="start-config">
-                Commencer une nouvelle configuration ...
-            </button>
-        </a>
-        {# <a href="{{ route('configurateur') }}" class="text-center mb-3"> #}
-            <button class="text-center mx-auto my-3 fs-5 bg-primary border border-secondary py-2 rounded">
+<div class="d-flex bg-white div-principale">
+	<img class="w-50 img-composition mx-auto"
+		src="{{ asset('images/compositionhdd.avif') }}"
+		alt="composants d'un ordinateur" />
+	<div class="mx-auto text-center">
+		<h2 class="text-center mx-auto my-3 text-secondary" style="font-family: Mynerve">
+			Créez votre ordinateur sur mesure
+		</h2>
+		{% if app.session.get('panier') != null %}
+			{% if panierUser != null %}
+				<a href="{{ path('configurateur') }}" class="text-center mb-3">
+					<button class="text-center mx-auto my-3 fs-5 bg-primary border border-secondary py-2 rounded animate__animated animate__pulse animate__infinite infinite">
+						Poursuivre votre dernière configuration
+					</button>
+				</a>
+			{% endif %}
+		{% endif %}
+		<a href="{{ path('configurateur.new') }}" class="text-center">
+			<button class="text-center mx-auto my-3 fs-5 bg-primary border border-secondary py-2 rounded animate__animated animate__pulse animate__infinite infinite"
+				id="start-config">
+				Commencer une nouvelle configuration ...
+			</button>
+		</a>
+		{# <a href="{{ route('configurateur') }}" class="text-center mb-3"> #}
+		{# <button class="text-center mx-auto my-3 fs-5 bg-primary border border-secondary py-2 rounded">
                 En apprendre davantage sur le montage d'un ordinateur ...
             </button>
-        </a>
+        </a> #}
 
-        {% if app.user %}
-            {% include 'accueil/panierUser.html.twig' %} 
-        {% endif %}
-    </div>
+		{% if app.user %}
+			{% include 'accueil/panierUser.html.twig' %}
+		{% endif %}
+	</div>
 </div>
 
-
 <style>
-    .animate__animated.animate__bounce {
-        --animate-duration: 2s;
-    }
+	.animate__animated.animate__bounce { --animate-duration: 2s; }
 
-    @media screen and (max-width: 600px) {
-        .div-principale {
-            display: grid !important;
-        }
+	@media screen and (max-width: 600px) { .div-principale { display: grid !important; }
 
-        .img-composition {
-            width: 90% !important;
-        }
-    }
-
+	.img-composition { width: 90% !important; } }
 </style>
-

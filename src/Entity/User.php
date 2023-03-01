@@ -24,7 +24,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column]
     /**
-     * Summary of roles
+     * Summary of roles.
      *
      * @var array{string, string}
      */
@@ -36,8 +36,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private string $password;
 
-    // #[ORM\OneToMany(mappedBy: 'user', cascade: ['persist', 'remove'])]
-    // private ?Panier $panier = null;
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Panier::class, fetch: 'EAGER')]
+    private $panier = null;
 
     public function getId(): ?int
     {
@@ -109,25 +109,25 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         // $this->plainPassword = null;
     }
 
-    // public function getPanier(): ?Panier
-    // {
-    //     return $this->panier;
-    // }
+    public function getPanier()
+    {
+        return $this->panier;
+    }
 
-    // public function setPanier(?Panier $panier): self
-    // {
-    //     // unset the owning side of the relation if necessary
-    //     if ($panier === null && $this->panier !== null) {
-    //         $this->panier->setUser(null);
-    //     }
+    public function setPanier(?Panier $panier): self
+    {
+        // unset the owning side of the relation if necessary
+        if (null === $panier && null !== $this->panier) {
+            $this->panier->setUser(null);
+        }
 
-    //     // set the owning side of the relation if necessary
-    //     if ($panier !== null && $panier->getUser() !== $this) {
-    //         $panier->setUser($this);
-    //     }
+        // set the owning side of the relation if necessary
+        if (null !== $panier && $panier->getUser() !== $this) {
+            $panier->setUser($this);
+        }
 
-    //     $this->panier = $panier;
+        $this->panier = $panier;
 
-    //     return $this;
-    // }
+        return $this;
+    }
 }

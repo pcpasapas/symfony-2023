@@ -24,6 +24,18 @@ class ConfigurateurController extends AbstractController
         $this->categories = $categoryRepository->findAll();
     }
 
+    #[Route('/saveCart', name: 'save.cart', methods: 'POST')]
+    public function saveCart(Request $request, ManagerRegistry $doctrine): Response
+    {
+        $session = $request->getSession();
+        $panierRepository = $doctrine->getRepository(Panier::class);
+        $panier = $panierRepository->find($session->get('panier'));
+        $panier->setName($request->get('name'));
+        $panierRepository->save($panier, true);
+
+        return $this->redirectToRoute('configurateur');
+    }
+
     public function getSomme($panier): string
     {
         $somme = 0;
@@ -57,6 +69,7 @@ class ConfigurateurController extends AbstractController
             'composants' => null,
             'panier' => $panier,
             'somme' => $this->getSomme($panier),
+            'panierEntity' => $this->panierRepository->find($session->get('panier')),
         ]);
     }
 
@@ -79,6 +92,7 @@ class ConfigurateurController extends AbstractController
             'categories' => $this->categories,
             'composants' => null,
             'panier' => $panier,
+            'panierEntity' => $this->panierRepository->find($session->get('panier')),
             'somme' => $this->getSomme($panier),
         ]);
     }
