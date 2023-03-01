@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace App\Controller;
 
 use App\Repository\PanierRepository;
@@ -21,6 +19,7 @@ class PagesController extends AbstractController
         $panierUser = $panierRepository->findByUser($this->getUser());
         $error = $authenticationUtils->getLastAuthenticationError();
         $lastUsername = $authenticationUtils->getLastUsername();
+
         return $this->render('accueil/index.html.twig', ['_fragment' => 'index', 'last_username' => $lastUsername, 'error' => $error, 'panierUser' => $panierUser]);
     }
 
@@ -29,6 +28,7 @@ class PagesController extends AbstractController
     {
         return $this->render('pages/tutos.html.twig');
     }
+
     #[Route('/jeux', name: 'jeux_pages')]
     public function jeux(): Response
     {
