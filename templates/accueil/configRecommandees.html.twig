@@ -1,0 +1,21 @@
+<h2 class="text-center mx-auto my-3 text-secondary" style="font-family: Mynerve">
+	Les configurations recommandées
+</h2>
+<div class="d-flex justify-content-center flex-wrap">
+	{% for jeu in games %}
+		<a href="{{
+			path(
+				'jeu.show',
+				{
+					slug: jeu.slug
+				}
+			)
+			}}">
+			<img src="{{ asset('/images/Jeux/') ~ jeu.slug ~ '.avif' }}" alt="jeu.name" class="logoJeu m-3" />
+		</a>
+	{% endfor %}
+</div>
+
+<style>
+	.logoJeu { width: 200px; height: 220px; }
+</style>

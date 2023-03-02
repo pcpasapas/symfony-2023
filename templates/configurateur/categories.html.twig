@@ -1,19 +1,21 @@
 <div>
-	<h2>
-		Choisissez vos composants
+	<h2 class="text-center mx-auto my-3 text-secondary" style="font-family: Mynerve">
+		Ajouter des composants
 	</h2>
-	{% for categorie in categories %}
-		{% if panier[categorie.slug] == null %}
-			<a href="{{
-				path(
-					'configurateur.cat',
-					{
-						slug: categorie.slug
-					}
-				)
-				}}">
-				<button class="btn btn-primary">{{ categorie.name }}</button>
-			</a>
-		{% endif %}
-	{% endfor %}
+	<div class="d-flex justify-content-center flex-wrap">
+		{% for categorie in categories %}
+			{% if panier[categorie.slug] == null %}
+				<a href="{{
+					path(
+						'configurateur.cat',
+						{
+							slug: categorie.slug
+						}
+					)
+					}}#composants">
+					<button class="btn btn-primary m-1">{{ categorie.name }}</button>
+				</a>
+			{% endif %}
+		{% endfor %}
+	</div>
 </div>

@@ -26,16 +26,16 @@
 					</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link {{ app.request.pathinfo == '/tutos' ? 'active' : '' }} " href="{{ path('tuto_pages') }}#app">
-						Tutos
-					</a>
-				</li>
-				<li class="nav-item">
 					<a class="nav-link {{ app.request.pathinfo == '/jeux' ? 'active' : '' }}" href="{{ path('app_jeux') }}">
 						Configurations recommandées
 					</a>
 				</li>
 				{% if is_granted('ROLE_ADMIN') %}
+					<li class="nav-item">
+						<a class="nav-link {{ app.request.pathinfo == '/tutos' ? 'active' : '' }} " href="{{ path('tuto_pages') }}#app">
+							Tutos
+						</a>
+					</li>
 					<li class="nav-item"><a class="nav-link" href="{{ path('admin') }}">Admin</a></li>
 				{% endif %}
 			</ul>
@@ -44,7 +44,7 @@
 			<ul class="navbar-nav ms-auto text-center">
 				<!-- Authentication Links -->
 				{% if app.user == null %}
-					<li class="nav-item"><a class="nav-link" href="{{ path('app_login') }}#connect">Se connecter</a></li>
+					<li class="nav-item"><a class="nav-link" href="{{ path('homepage') }}#connect">Se connecter</a></li>
 					<li class="nav-item"><a class="nav-link" href="{{ path('app_register') }}">Créer un compte</a></li>
 				{% endif %}
 				{% if app.user %}

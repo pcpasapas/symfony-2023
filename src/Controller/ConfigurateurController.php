@@ -14,6 +14,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class ConfigurateurController extends AbstractController
 {
@@ -49,7 +50,7 @@ class ConfigurateurController extends AbstractController
     }
 
     #[Route('/configurateur/new', name: 'configurateur.new')]
-    public function new(PanierRepository $panierRepository, Request $request): Response
+    public function new(PanierRepository $panierRepository, Request $request, AuthenticationUtils $authenticationUtils): Response
     {
         // creation du nouveau panier
         $panier = new Panier();
@@ -64,17 +65,24 @@ class ConfigurateurController extends AbstractController
 
         $panier = $this->panierRepository->getPanierInArray($session->get('panier'));
 
+        // get the login error if there is one
+        $error = $authenticationUtils->getLastAuthenticationError();
+        // last username entered by the user
+        $lastUsername = $authenticationUtils->getLastUsername();
+
         return $this->render('configurateur/layout.html.twig', [
             'categories' => $this->categories,
             'composants' => null,
             'panier' => $panier,
             'somme' => $this->getSomme($panier),
             'panierEntity' => $this->panierRepository->find($session->get('panier')),
+            'error' => $error,
+            'last_username' => $lastUsername,
         ]);
     }
 
     #[Route('/configurateur', name: 'configurateur')]
-    public function index(Request $request): Response
+    public function index(Request $request, AuthenticationUtils $authenticationUtils): Response
     {
         // stockage du panier dans la session
         $session = $request->getSession();
@@ -100,12 +108,19 @@ class ConfigurateurController extends AbstractController
             return $this->redirectToRoute('configurateur.new');
         }
 
+        // get the login error if there is one
+        $error = $authenticationUtils->getLastAuthenticationError();
+        // last username entered by the user
+        $lastUsername = $authenticationUtils->getLastUsername();
+
         return $this->render('configurateur/layout.html.twig', [
             'categories' => $this->categories,
             'composants' => null,
             'panier' => $panier,
             'panierEntity' => $this->panierRepository->find($session->get('panier')),
             'somme' => $this->getSomme($panier),
+            'error' => $error,
+            'last_username' => $lastUsername,
         ]);
     }
 
@@ -144,7 +159,7 @@ class ConfigurateurController extends AbstractController
     /**
      * retourne la page configurateur avec les comoposants de la category.
      */
-    public function categorie(Category $category, ManagerRegistry $doctrine, Request $request): Response
+    public function categorie(Category $category, ManagerRegistry $doctrine, Request $request, AuthenticationUtils $authenticationUtils): Response
     {
         $class = 'App\\Entity\\'.$category->getSlug();
         $repo = $doctrine->getRepository($class);
@@ -161,11 +176,18 @@ class ConfigurateurController extends AbstractController
 
         $session = $this->requestStack->getSession();
 
+        // get the login error if there is one
+        $error = $authenticationUtils->getLastAuthenticationError();
+        // last username entered by the user
+        $lastUsername = $authenticationUtils->getLastUsername();
+
         return $this->render('configurateur/layout.html.twig', [
             'categories' => $this->categories,
             'composants' => $composants,
             'panier' => $this->panierRepository->getPanierInArray($session->get('panier')),
             'somme' => $this->getSomme($this->panierRepository->getPanierInArray($session->get('panier'))),
+            'error' => $error,
+            'last_username' => $lastUsername,
         ]);
     }
 }
