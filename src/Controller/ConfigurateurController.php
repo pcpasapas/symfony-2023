@@ -168,11 +168,7 @@ class ConfigurateurController extends AbstractController
         $session = $request->getSession();
         $panier = $doctrine->getRepository(Panier::class)->find($session->get('panier'));
 
-        if ('Processeur' == $category->getSlug() || 'CarteMere' == $category->getSlug()) {
-            $composants = $repo->findAllByPanier($panier);
-        } else {
-            $composants = $repo->findAll();
-        }
+        $composants = ('Processeur' == $category->getSlug() || 'CarteMere' == $category->getSlug()) ? $repo->findAllByPanier($panier) : $repo->findAll();
 
         $session = $this->requestStack->getSession();
 
