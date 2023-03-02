@@ -20,7 +20,7 @@
 							{{ item.socket }}
 						</p>
 					{% endif %}
-					{% if item.puissanceMin is defined and item.category != 'Cartes Graphiques' %}
+					{% if item.puissanceMin is defined and key != 'CarteGraphique' %}
 						<p class="m-0">
 							Min : {{ item.puissanceMin }} / Boost : {{ item.puissanceBoost }}
 						</p>
@@ -30,9 +30,9 @@
 					{% endif %}
 					{% if item.capacite is defined %}
 						<p class="m-0">
-							{% if item.category != 'Cartes Graphiques' %}
+							{% if key != 'CarteGraphique' %}
 								<p class="m-0">
-									{{ item.category }}
+									{{ key }}
 								</p>
 							{% endif %}
 							{{ item.capacite }} Go

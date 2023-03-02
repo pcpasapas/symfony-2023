@@ -15,7 +15,9 @@
 			<!-- Left Side Of Navbar -->
 			<ul class="navbar-nav me-auto text-center">
 				<li class="nav-item">
-					<a class="nav-link {{ app.request.pathinfo == '/' ? 'active' : '' }}" href="{{ path('homepage') }}#index">Accueil</a>
+					<a class="nav-link {{ app.request.pathinfo == '/' ? 'active' : '' }}" href="{{ path('homepage') }}#index">
+						Accueil
+					</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link {{ app.request.pathinfo == '/configurateur' ? 'active' : '' }}"
@@ -29,7 +31,7 @@
 					</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link {{ app.request.pathinfo == '/jeux' ? 'active' : '' }}" href="{{ path('jeux_pages') }}">
+					<a class="nav-link {{ app.request.pathinfo == '/jeux' ? 'active' : '' }}" href="{{ path('app_jeux') }}">
 						Configurations recommandées
 					</a>
 				</li>

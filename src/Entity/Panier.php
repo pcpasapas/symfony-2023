@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace App\Entity;
 
 use App\Repository\PanierRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: PanierRepository::class)]
@@ -48,9 +50,13 @@ class Panier
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $name = null;
 
+    #[ORM\OneToMany(mappedBy: 'panier', targetEntity: Game::class)]
+    private Collection $games;
+
     public function __construct()
     {
         $this->setCreatedAt(new \DateTimeImmutable('now'));
+        $this->games = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -186,6 +192,36 @@ class Panier
     public function setName(?string $name): self
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Game>
+     */
+    public function getGames(): Collection
+    {
+        return $this->games;
+    }
+
+    public function addGame(Game $game): self
+    {
+        if (!$this->games->contains($game)) {
+            $this->games->add($game);
+            $game->setPanier($this);
+        }
+
+        return $this;
+    }
+
+    public function removeGame(Game $game): self
+    {
+        if ($this->games->removeElement($game)) {
+            // set the owning side to null (unless already changed)
+            if ($game->getPanier() === $this) {
+                $game->setPanier(null);
+            }
+        }
 
         return $this;
     }

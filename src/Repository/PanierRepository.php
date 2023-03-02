@@ -58,6 +58,20 @@ class PanierRepository extends ServiceEntityRepository
         ];
     }
 
+        public function getPanierInArrayWithPaniers(Panier $panier): array
+        {
+            return [
+                'Boitier' => $panier->getBoitier(),
+                'Alimentation' => $panier->getAlimentation(),
+                'Processeur' => $panier->getProcesseur(),
+                'CarteMere' => $panier->getCarteMere(),
+                'CarteGraphique' => $panier->getCarteGraphique(),
+                'Ram' => $panier->getRam(),
+                'Hdd' => $panier->getHdd(),
+                'Ssd' => $panier->getSsd(),
+            ];
+        }
+
    /**
     * @return array<Panier> Returns an array of Panier objects
     */

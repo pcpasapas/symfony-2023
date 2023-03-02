@@ -26,7 +26,7 @@ class Alimentation
     #[ORM\Column]
     private ?int $price = null;
 
-    #[ORM\ManyToOne(inversedBy: 'alimentations', fetch: 'EAGER')]
+    #[ORM\ManyToOne(inversedBy: 'alimentations')]
     #[ORM\JoinColumn(nullable: true)]
     private ?Category $category = null;
 
@@ -80,7 +80,7 @@ class Alimentation
 
     public function getFormattedPrice(): ?string
     {
-        return number_format($this->price / 100, 2, ',', ' ') . '€';
+        return number_format($this->price / 100, 2, ',', ' ').'€';
     }
 
     public function setPrice(int $price): self
@@ -112,7 +112,7 @@ class Alimentation
 
     public function addPanier(Panier $panier): self
     {
-        if (! $this->paniers->contains($panier)) {
+        if (!$this->paniers->contains($panier)) {
             $this->paniers->add($panier);
             $panier->setAlimentation($this);
         }

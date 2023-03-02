@@ -1,0 +1,24 @@
+{% extends 'layouts/default.html.twig' %}
+
+{% block title %}
+	Jeux
+{% endblock %}
+
+{% block body %}
+	<div>
+		<h1>
+			Pages des jeux
+		</h1>
+		{% for jeu in jeux %}
+			<a href="{{  path('jeu.show', {slug: jeu.slug}) }}">
+			<p>{{ jeu.name }}<p>
+			<img src="{{ asset('/images/Jeux/') ~ jeu.slug ~ '.avif' }}" alt="jeu.name" class="logoJeu">
+			</a>
+		{% endfor %}
+	</div>
+<style>
+.logoJeu {
+	width: 200px;
+}
+</style>
+{% endblock %}

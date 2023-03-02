@@ -9,6 +9,7 @@ use App\Entity\Boitier;
 use App\Entity\CarteGraphique;
 use App\Entity\CarteMere;
 use App\Entity\Category;
+use App\Entity\Game;
 use App\Entity\Hdd;
 use App\Entity\Panier;
 use App\Entity\Processeur;
@@ -26,13 +27,16 @@ class DashboardController extends AbstractDashboardController
     public function __construct(private AdminUrlGenerator $adminUrlGenerator)
     {
     }
-    #[Route('/admin', name: 'admin')]    public function index(): Response
+
+    #[Route('/admin', name: 'admin')]
+    public function index(): Response
     {
         // return parent::index();
 
         // Option 1. You can make your dashboard redirect to some common page of your backend
         //
         $adminUrlGenerator = $this->adminUrlGenerator->setController(AdminUrlGenerator::class);
+
         return $this->redirect($adminUrlGenerator->setController(CategoryCrudController::class)->generateUrl());
 
         // Option 2. You can make your dashboard redirect to different pages depending on the user
@@ -67,5 +71,6 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Hdd', 'fas fa-list', Hdd::class);
         yield MenuItem::linkToCrud('Ssd', 'fas fa-list', Ssd::class);
         yield MenuItem::linkToCrud('Paniers', 'fas fa-list', Panier::class);
+        yield MenuItem::linkToCrud('Game', 'fas fa-list', Game::class);
     }
 }

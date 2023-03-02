@@ -26,18 +26,19 @@ class Boitier
     #[ORM\Column]
     private ?int $price = null;
 
-    #[ORM\ManyToOne(inversedBy: 'boitiers', fetch: 'EAGER')]
+    #[ORM\ManyToOne(inversedBy: 'boitiers')]
     #[ORM\JoinColumn(nullable: true)]
     private ?Category $category = null;
 
     #[ORM\OneToMany(mappedBy: 'boitier', targetEntity: Panier::class)]
     private Collection $paniers;
 
-    #[ORM\Column(length:50, nullable: true)]
+    #[ORM\Column(length: 50, nullable: true)]
     private ?string $format = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $lien = null;
+
     public function __construct()
     {
         $this->paniers = new ArrayCollection();
@@ -79,7 +80,7 @@ class Boitier
 
     public function getFormattedPrice(): ?string
     {
-        return number_format($this->price / 100, 2, ',', ' ') .  '€';
+        return number_format($this->price / 100, 2, ',', ' ').'€';
     }
 
     public function setPrice(int $price): self
@@ -111,7 +112,7 @@ class Boitier
 
     public function addPanier(Panier $panier): self
     {
-        if (! $this->paniers->contains($panier)) {
+        if (!$this->paniers->contains($panier)) {
             $this->paniers->add($panier);
             $panier->setBoitier($this);
         }

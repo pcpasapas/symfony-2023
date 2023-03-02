@@ -45,6 +45,9 @@ class Processeur
     #[ORM\Column(length: 50, nullable: true)]
     private ?string $modele_min = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $lien = null;
+
     public function __construct()
     {
         $this->paniers = new ArrayCollection();
@@ -182,6 +185,18 @@ class Processeur
     public function setModeleMin(?string $modele_min): self
     {
         $this->modele_min = $modele_min;
+
+        return $this;
+    }
+
+    public function getLien(): ?string
+    {
+        return $this->lien;
+    }
+
+    public function setLien(?string $lien): self
+    {
+        $this->lien = $lien;
 
         return $this;
     }

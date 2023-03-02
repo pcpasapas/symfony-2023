@@ -36,7 +36,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private string $password;
 
-    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Panier::class, fetch: 'EAGER')]
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Panier::class)]
     private $panier = null;
 
     public function getId(): ?int

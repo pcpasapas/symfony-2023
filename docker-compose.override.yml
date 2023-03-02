@@ -1,14 +1,26 @@
 version: '3'
 
 services:
-###> doctrine/doctrine-bundle ###
-  database:
-    ports:
-      - "5432"
-###< doctrine/doctrine-bundle ###
+ php:
+  build:
+   context: .
+   dockerfile: docker/php/Dockerfile
+  container_name: ${APP_SLUG}_php
+  restart: unless-stopped
+  environment:
+   SERVICE_NAME: ${APP_SLUG}_php
+   SERVICE_TAGS: ${APP_ENV}
+  working_dir: /var/www
+  volumes:
+   - ./:/var/www
+   - ./docker/php/local.ini:/usr/local/etc/php/conf.d/local.ini
 
-###> symfony/mailer ###
-  mailer:
-    image: schickling/mailcatcher
-    ports: ["1025", "1080"]
+ database:
+  ports:
+   - '5432'
+
+ ###> symfony/mailer ###
+ mailer:
+  image: schickling/mailcatcher
+  ports: ['1025', '1080']
 ###< symfony/mailer ###
