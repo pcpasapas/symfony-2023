@@ -43,7 +43,11 @@ class ProcesseurRepository extends ServiceEntityRepository
     }
 
    /**
-    * @return Processeur[] Returns an array of CarteMere objects
+    * It returns the 10 cheapest CPU's that are compatible with the motherboard in the cart.
+    *
+    * @param Panier panier The panier object that we're using to find the compatible CPU
+    *
+    * @return array An array of CarteGraphique objects
     */
    public function findAllByPanier(Panier $panier): array
    {

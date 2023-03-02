@@ -43,7 +43,11 @@ class CarteMereRepository extends ServiceEntityRepository
     }
 
    /**
-    * @return CarteMere[] Returns an array of CarteMere objects
+    * It returns the 10 cheapest cartes mères compatible with the processeur of the panier.
+    *
+    * @param Panier panier The panier object that we're using to find compatible components
+    *
+    * @return array An array of CarteMere objects
     */
    public function findAllByPanier(Panier $panier): array
    {

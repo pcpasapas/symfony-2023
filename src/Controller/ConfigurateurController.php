@@ -156,13 +156,19 @@ class ConfigurateurController extends AbstractController
     }
 
     #[Route('/configurateur/{slug}', name: 'configurateur.cat')]
+    /* It's a function that takes a category, a doctrine manager, a request and an authentication
+    utility as parameters and returns a response. */
     /**
-     * retourne la page configurateur avec les comoposants de la category.
+     * categorie.
+     *
+     * @param mixed $category
+     * @param mixed $doctrine
+     * @param mixed $request
+     * @param mixed $authenticationUtils
      */
     public function categorie(Category $category, ManagerRegistry $doctrine, Request $request, AuthenticationUtils $authenticationUtils): Response
     {
-        $class = 'App\\Entity\\'.$category->getSlug();
-        $repo = $doctrine->getRepository($class);
+        $repo = $doctrine->getRepository('App\\Entity\\'.$category->getSlug());
 
         // recuperation du panier
         $session = $request->getSession();
