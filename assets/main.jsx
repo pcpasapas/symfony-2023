@@ -1,7 +1,7 @@
 import { Component, h, render } from 'preact'
 export default class Hello extends Component {
-    constructor(props) {
-        super(props)
+    constructor() {
+        super()
         this.state = {
             name: 'Jean',
             count: 0,

@@ -62,7 +62,7 @@ const fullConfig = Encore
 
 	// enables Sass/SCSS support
 	.enableSassLoader()
-	.enableVueLoader()
+	// .enableVueLoader(() => {}, { runtimeCompilerBuild: false })
 	.getWebpackConfig()
 
 // uncomment if you use TypeScript
