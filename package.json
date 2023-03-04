@@ -1,6 +1,7 @@
 {
     "devDependencies": {
         "@babel/core": "^7.17.0",
+        "@babel/plugin-transform-react-jsx": "^7.21.0",
         "@babel/preset-env": "^7.16.0",
         "bootstrap": "^5.2.3",
         "compression-webpack-plugin": "^10.0.0",
@@ -25,6 +26,13 @@
     "dependencies": {
         "@popperjs/core": "^2.11.6",
         "@symfony/webpack-encore": "^4.0.0",
-        "turbolinks": "^5.2.0"
+        "babel-loader": "^9.1.2",
+        "babel-plugin-transform-react-jsx": "^6.24.1",
+        "babel-preset-env": "^1.7.0",
+        "preact": "^10.13.0",
+        "preact-custom-element": "^4.2.1",
+        "turbolinks": "^5.2.0",
+        "vue": "^3.2.47",
+        "vue-loader": "^17.0.1"
     }
 }
