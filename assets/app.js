@@ -11,11 +11,11 @@ Turbolinks.start()
 //Components.loadAll(),
 //);
 
-// import TestVue from './customElements/TestVue.ce.vue'
-// import { defineCustomElement } from 'vue'
+import TestVue from './customElements/TestVue.ce.vue'
+import { defineCustomElement } from 'vue'
 
-// const TestElement = defineCustomElement(TestVue)
-// customElements.define('test-vueelement', TestElement)
+const TestElement = defineCustomElement(TestVue)
+customElements.define('test-vueelement', TestElement)
 
 import register from 'preact-custom-element'
 import Hello from './main.jsx'
