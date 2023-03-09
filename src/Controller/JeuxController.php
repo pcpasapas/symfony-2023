@@ -15,9 +15,7 @@ class JeuxController extends AbstractController
     #[Route('/jeux', name: 'app_jeux')]
     public function index(Security $security, GameRepository $gameRepository): Response
     {
-        $response = $security->logout(false);
         $jeux = $gameRepository->findAll();
-
         return $this->render('jeux/index.html.twig', [
             'jeux' => $jeux,
         ]);
