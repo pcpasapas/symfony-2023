@@ -25,6 +25,13 @@ AddOutputFilterByType DEFLATE application/x-javascript
 
     RewriteEngine On
 
+
+
+    # redirect to https behind a load balancer
+    RewriteCond %{HTTP:X-Forwarded-Proto} =http
+    RewriteRule .* https://%{HTTP:Host}%{REQUEST_URI} [L,R=permanent]
+
+
     # Determine the RewriteBase automatically and set it as environment variable.
     # If you are using Apache aliases to do mass virtual hosting or installed the
     # project in a subdirectory, the base path will be prepended to allow proper
