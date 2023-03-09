@@ -18,9 +18,9 @@ import { defineCustomElement } from 'vue'
 const TestElement = defineCustomElement(TestVue)
 customElements.define('test-vueelement', TestElement)
 
-import register from 'preact-custom-element'
-import Hello from './main.jsx'
-register(Hello)
+// import register from 'preact-custom-element'
+// import Hello from './main.jsx'
+// register(Hello)
 // customElements.define('test-element', Test)
 
 // const tutos = document.getElementById('tutos')
