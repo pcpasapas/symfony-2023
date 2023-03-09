@@ -1,7 +1,7 @@
 {
   "isProd": true,
   "viteServer": false,
-  "entrypoints": {
+  "entryPoints": {
     "app": {
       "js": [
         "/build/assets/app-2a0b8c50.js"
