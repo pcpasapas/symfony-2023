@@ -6,14 +6,16 @@ use App\Entity\Game;
 use App\Repository\GameRepository;
 use App\Repository\PanierRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class JeuxController extends AbstractController
 {
     #[Route('/jeux', name: 'app_jeux')]
-    public function index(GameRepository $gameRepository): Response
+    public function index(Security $security, GameRepository $gameRepository): Response
     {
+        $response = $security->logout(false);
         $jeux = $gameRepository->findAll();
 
         return $this->render('jeux/index.html.twig', [
@@ -42,6 +44,6 @@ class JeuxController extends AbstractController
             }
         }
 
-        return number_format($somme / 100, 2, ',', ' ').'€';
+        return number_format($somme / 100, 2, ',', ' ') . '€';
     }
 }
