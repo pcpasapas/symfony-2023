@@ -11,7 +11,7 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class PagesController extends AbstractController
 {
-    #[Route('/', name: 'homepage')]
+    #[Route('/', name: 'homepage', schemes: ['https'])]
     public function index(AuthenticationUtils $authenticationUtils, PanierRepository $panierRepository, GameRepository $gameRepository): Response
     {
         // if ($this->getUser()) {
