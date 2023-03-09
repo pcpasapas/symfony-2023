@@ -6,7 +6,7 @@
 	<div class="div-config">
 		{% for key, item in panier %}
 			{% if item != null %}
-				<img class="{{ key }}" src="{{ asset('images/' ~ key ~ '/' ~ item.id ~ '.jpg') }}" alt="image {{ key }}" />
+				<img class="{{ key }}" src="/images/{{key}}/{{item.id}}.jpg" alt="image {{ key }}" />
 				<span class="{{ key ~ 'Text' }}">
 					{% if item.modeleMin is defined %}
 						<p class="m-0">

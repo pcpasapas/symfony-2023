@@ -37,6 +37,12 @@ class PagesController extends AbstractController
         return $this->render('pages/tutos.html.twig');
     }
 
+    #[Route('/composants', name: 'composants.index')]
+    public function composants(): Response
+    {
+        return $this->render('composants/index.html.twig');
+    }
+
     #[Route('/jeux', name: 'jeux_pages')]
     public function jeux(): Response
     {

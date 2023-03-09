@@ -12,7 +12,7 @@
 		{% for jeu in jeux %}
 			<a href="{{  path('jeu.show', {slug: jeu.slug}) }}">
 			<p>{{ jeu.name }}<p>
-			<img src="{{ asset('/images/Jeux/') ~ jeu.slug ~ '.avif' }}" alt="jeu.name" class="logoJeu">
+			<img src="/images/Jeux/{{jeu.slug}}.avif" alt="jeu.name" class="logoJeu">
 			</a>
 		{% endfor %}
 	</div>

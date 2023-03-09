@@ -1,11 +1,15 @@
 {
-  "entrypoints": {
+  "isProd": false,
+  "viteServer": {
+    "origin": "http://[::1]:5173",
+    "base": "/build/"
+  },
+  "entryPoints": {
     "app": {
       "js": [
-        "/build/runtime.6cd8d8df.js",
-        "/build/686.dc2ff6d5.js",
-        "/build/app.d6fe6a2e.js"
+        "http://[::1]:5173/build/assets/app.js"
       ]
     }
-  }
+  },
+  "legacy": false
 }

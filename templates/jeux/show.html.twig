@@ -12,7 +12,7 @@
 		<h1>
 			{{ jeu.name }}
 		</h1>
-		<img src="{{ asset('/images/Jeux/') ~ jeu.slug ~ '.avif' }}" alt="jeu.name" class="logoJeu" />
+		<img src="/images/Jeux/{{jeu.slug}}.avif" alt="jeu.name" class="logoJeu" />
 		{{ include('configurateur/configDetails.html.twig') }}
 	</div>
 	<style>

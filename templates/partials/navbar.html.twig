@@ -1,17 +1,12 @@
 <nav class="navbar navbar-expand-md navbar-dark bg-secondary shadow-sm">
 	<div class="container">
 		<a class="navbar-brand" style="font-family: Mynerve" href="{{ path('homepage') }}#index">Pc Pas à pas</a>
-		<button class="navbar-toggler"
-			type="button"
-			data-bs-toggle="collapse"
-			data-bs-target="#navbarSupportedContent"
-			aria-controls="navbarSupportedContent"
-			aria-expanded="false"
-			aria-label="">
+		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="">
 			<span class="navbar-toggler-icon"></span>
 		</button>
 
-		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+		<div
+			class="collapse navbar-collapse" id="navbarSupportedContent">
 			<!-- Left Side Of Navbar -->
 			<ul class="navbar-nav me-auto text-center">
 				<li class="nav-item">
@@ -20,8 +15,7 @@
 					</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link {{ app.request.pathinfo == '/configurateur' ? 'active' : '' }}"
-						href="{{ path('configurateur') }}">
+					<a class="nav-link {{ app.request.pathinfo == '/configurateur' ? 'active' : '' }}" href="{{ path('configurateur') }}">
 						Configurateur
 					</a>
 				</li>
@@ -30,33 +24,38 @@
 						Configurations recommandées
 					</a>
 				</li>
+				<li class="nav-item">
+					<a class="nav-link {{ app.request.pathinfo == '/composants' ? 'active' : '' }}" href="{{ path('composants.index') }}">
+						Les composants
+					</a>
+				</li>
 				{% if is_granted('ROLE_ADMIN') %}
 					<li class="nav-item">
 						<a class="nav-link {{ app.request.pathinfo == '/tutos' ? 'active' : '' }} " href="{{ path('tuto_pages') }}#app">
 							Tutos
 						</a>
 					</li>
-					<li class="nav-item"><a class="nav-link" href="{{ path('admin') }}">Admin</a></li>
+					<li class="nav-item">
+						<a class="nav-link" href="{{ path('admin') }}">Admin</a>
+					</li>
 				{% endif %}
 			</ul>
 
 			<!-- Right Side Of Navbar -->
-			<ul class="navbar-nav ms-auto text-center">
+			<ul
+				class="navbar-nav ms-auto text-center">
 				<!-- Authentication Links -->
 				{% if app.user == null %}
-					<li class="nav-item"><a class="nav-link" href="{{ path('homepage') }}#connect">Se connecter</a></li>
-					<li class="nav-item"><a class="nav-link" href="{{ path('app_register') }}">Créer un compte</a></li>
+					<li class="nav-item">
+						<a class="nav-link" href="{{ path('homepage') }}#connect">Se connecter</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="{{ path('app_register') }}">Créer un compte</a>
+					</li>
 				{% endif %}
 				{% if app.user %}
 					<li class="nav-item dropdown">
-						<a id="navbarDropdown"
-							class="nav-link dropdown-toggle"
-							href="#"
-							role="button"
-							data-bs-toggle="dropdown"
-							aria-haspopup="true"
-							aria-expanded="false"
-							v-pre>
+						<a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
 							{{ app.user.email }}
 						</a>
 						<div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
@@ -70,11 +69,21 @@
 </nav>
 
 <style>
-	.nav-link:hover { background: radial-gradient(white, #37123C 100%); border-color: black; border-radius: 50%; color:
-	black !important; }
+	.nav-link:hover {
+		background: radial-gradient(white, #37123C 100%);
+		border-color: black;
+		border-radius: 50%;
+		color: black !important;
+	}
 
-	.nav-link { color: #d2c7e1; }
+	.nav-link {
+		color: #d2c7e1;
+	}
 
-	.nav-link.active { background: radial-gradient(white 30%, #37123C 80%); border-color: black; border-radius: 50%; color:
-	black !important; }
+	.nav-link.active {
+		background: radial-gradient(white 30%, #37123C 80%);
+		border-color: black;
+		border-radius: 50%;
+		color: black !important;
+	}
 </style>

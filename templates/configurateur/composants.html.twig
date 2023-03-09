@@ -1,7 +1,7 @@
 <div class="d-flex" id='composants'>
 	{% for composant in composants %}
 		<div class="card" style="width: 18rem;">
-			<img src="{{ asset('./images/') ~ composant.category.slug ~ '/' ~ composant.id ~ '.jpg' }}"
+			<img src="/images/{{composant.category.slug}}/{{composant.id}}.jpg"
 				class="card-img-top"
 				alt="image du composant" />
 			<div class="card-body">

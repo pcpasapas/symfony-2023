@@ -1,4 +1,5 @@
-var Turbolinks = require('turbolinks')
+import Turbolinks from 'turbolinks'
+// var Turbolinks = require('turbolinks')
 Turbolinks.start()
 //document.addEventListener(
 //    'turbolinks:load',

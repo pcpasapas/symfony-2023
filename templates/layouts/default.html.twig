@@ -11,7 +11,7 @@
 
 			{% endblock %}
 		</title>
-		<link rel="icon" href="{{ asset('favicon.ico') }}" />
+		<link rel="icon" href="/favicon.ico" />
 		<!-- Google tag (gtag.js) -->
 		<script async src="https://www.googletagmanager.com/gtag/js?id=G-153ZZY7C5M"></script>
 		<script>
@@ -28,11 +28,11 @@
 		<!-- GOOGLE ADSENSE END -->
 
 		{% block stylesheets %}
-			{{ encore_entry_link_tags('app') }}
+			{{ vite_entry_link_tags('app') }}
 		{% endblock %}
 
 		{% block javascripts %}
-			{{ encore_entry_script_tags('app')}}
+			{{ vite_entry_script_tags('app', { dependency: 'react' }) }}
 		{% endblock %}
 	</head>
 	<body id="index">
