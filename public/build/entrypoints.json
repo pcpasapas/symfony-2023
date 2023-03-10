@@ -1,13 +1,13 @@
 {
   "isProd": false,
   "viteServer": {
-    "origin": "http://[::1]:5173",
+    "origin": "https://[::1]:5173",
     "base": "/build/"
   },
   "entryPoints": {
     "app": {
       "js": [
-        "http://[::1]:5173/build/assets/app.js"
+        "https://[::1]:5173/build/assets/app.js"
       ]
     }
   },
