@@ -1,16 +1,14 @@
 {
-  "isProd": true,
-  "viteServer": false,
+  "isProd": false,
+  "viteServer": {
+    "origin": "http://[::1]:5173",
+    "base": "/build/"
+  },
   "entryPoints": {
     "app": {
       "js": [
-        "/build/assets/app-bb5b8540.js"
-      ],
-      "css": [
-        "/build/assets/app-d451af2f.css"
-      ],
-      "preload": [],
-      "legacy": false
+        "http://[::1]:5173/build/assets/app.js"
+      ]
     }
   },
   "legacy": false
